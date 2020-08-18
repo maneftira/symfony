@@ -1,0 +1,92 @@
+{% extends 'home/home.html.twig' %}
+
+
+{% block title %}Gestion Auto Entreprise
+{% endblock %}
+
+{% block body %}
+	<center class="container fluid ">
+		<div class=' col-10 mt-3' id="colorlib-main">
+			<h1 class="h3 mb-3 font-weight-normal ">Gérer mon auto-entreprise</h1>
+			<p>Pour accéder aux formulaires de modification et de cessation d’activité, veuillez poursuivre votre navigation en cliquant sur le bouton correspondant :</p>
+			<div class="row mt-5">
+				<div class="col">
+					<button class="btn btn-info">
+						<a style="color:white" href="{{ path('modification')}}">Modifier mon auto-entreprise</a>
+					</button>
+				</div>
+				<div class="col">
+					<button class="btn btn-info" data-toggle="modal" data-target="#exampleModalCenter1">Cesser mon auto-entreprise</button>
+				</div>
+			</div>
+			<p class="mt-5">Pour déclarer et payer mes cotisations ou Rédiger une facture veuillez poursuivre votre navigation en cliquant sur le bouton correspondant :</p>
+			<div class="row mt-5 ">
+				<div class="col">
+					<div class="container" style="background:#e5eaf5;border-radius: 15px;width: 200px;height:250px;
+																																														  font-family:'Source Sans Pro', sans-serif">
+						<div>
+							<h1 class="h3 mb-3 font-weight-normal ">Déclarer et payer mes cotisations</h1>
+							<table>
+								<tr>
+									<td>
+										<a href="{{ path('paiement')}}">Déclarer et payer</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="">Calendrier des échénaces</a>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="container" style="background:#e5eaf5;width: 200px;border-radius: 15px;height:250px;
+																																															  font-family:'Source Sans Pro', sans-serif">
+						<div>
+							<h1 class="h3 mb-3 font-weight-normal ">Rédiger une facture</h1>
+							<table>
+								<tr>
+									<td>
+										<a href="{{ path('facture')}}">Rédiger une facture</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<a href="{{ path('dossier')}}">Mes documents</a>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</center>
+		<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Confirmation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						{{form_start(form)}}
+						<P>Envoyer la deamande de cessation d’activité?</P>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						{{ form_row(form.submit) }}
+					</div>
+					{{ form_end(form) }}
+				</div>
+
+			</div>
+		</div>
+	{% endblock %}

@@ -1,0 +1,377 @@
+{% extends 'home/home.html.twig' %}
+
+{% block title %}Demandes
+{% endblock %}
+{% block body %}
+	<center class="container fluid col-10 mt-5 ">
+		<div id="colorlib-main" class=" mt-3 ">
+			<div id="top">
+				<h1 class="h3 mb-3 font-weight-normal ">Demandes de creation</h1>
+				{% if demandes==null %}
+					<p>Pas de demandes</p>
+					<p>
+					{% endif %}
+					{% for i in demandes%}
+						<div class="border  mt-5 " style="width: 210mm; height: 297mm">
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Nom:</label>
+									<p>{{i.nom}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Prenom:</label>
+									<p>{{i.prenom}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Sex:</label>
+									<p>{{i.sex}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Nationnalité:</label>
+									<p>{{i.nationnalite}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Date de naissance:</label>
+									<p>{{i.DateN|date("m/d/Y")}}</p>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Lieu de naissance:</label>
+									<p>{{i.LieuN}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Adresse:</label>
+									<p>{{i.adresse}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Municipalite:</label>
+									<p>{{i.municipalite}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										code Postale:</label>
+									<p>{{i.codePostal}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Adresse d'affaire:</label>
+									<p>{{i.adresseAffaire}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Municipalite d'affaire:</label>
+									<p>{{i.municipaliteAffaire}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Code Postale d'affaire:</label>
+									<p>{{i.codePostalAffaire}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Date de début d'activite:</label>
+									<p>{{i.dateActivite|date("m/d/Y")}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Activité Saisonniere:</label>
+									<p>
+										{% if i.saisonniere == 1 %}
+											Oui
+										{% else %}
+											Non
+										{% endif %}
+									</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Domaine d'activité:</label>
+									<p>{{i.domaine}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Activité:</label>
+									<p id="act">{{i.activites}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Num de Securité Scoiale:</label>
+									<p>{{i.numSecScoiale}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										activiteSimulat:</label>
+									<p>{{i.activiteSimulat}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Regime d'assurance:</label>
+									<p>{{i.regimeAssurance}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Telephone:</label>
+									<p>{{i.telephone}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Fax:</label>
+									<p>{{i.fax}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Email:</label>
+									<p>{{i.email}}</p>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col">
+									<label style="float: left;">
+										Fait le:</label>
+									<p>{{i.date|date("m/d/Y")}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Au:</label>
+									<p>{{i.fait}}</p>
+								</div>
+							</div>
+							<div class="row">
+							<button class="btn btn-info">
+								<a style="color:white" href="{{path('add',{'id': i.id })}}">Confirmer</a>
+							</button>
+							<button class="btn btn-danger">
+								<a style="color:white" href="{{path('delete',{'id': i.id })}}">Rejeter</a>
+							</button>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<div id="bt" class="mt-5">
+					<h1 class="h3 mb-3 font-weight-normal ">Demandes de cessations</h1>
+					{% for i in cessations%}
+						<div class="border  mt-5 " style="width: 210mm;padding: 25px;">
+							<label style="float: left;">
+								Siret:</label>
+							<p>{{i.siret}}</p>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Nom:</label>
+									<p>{{i.nom}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Prenom:</label>
+									<p>{{i.prenom}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Sex:</label>
+									<p>{{i.sex}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Nationnalité:</label>
+									<p>{{i.nationnalite}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Date de naissance:</label>
+									<p>{{i.DateN|date("m/d/Y")}}</p>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Lieu de naissance:</label>
+									<p>{{i.LieuN}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Adresse:</label>
+									<p>{{i.adresse}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Municipalite:</label>
+									<p>{{i.municipalite}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										code Postale:</label>
+									<p>{{i.codePostal}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Adresse d'affaire:</label>
+									<p>{{i.adresseAffaire}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Municipalite d'affaire:</label>
+									<p>{{i.municipaliteAffaire}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Code Postale d'affaire:</label>
+									<p>{{i.codePostalAffaire}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Date de début d'activite:</label>
+									<p>{{i.dateActivite|date("m/d/Y")}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Activité Saisonniere:</label>
+									<p>
+										{% if i.saisonniere == 1 %}
+											Oui
+										{% else %}
+											Non
+										{% endif %}
+									</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Domaine d'activité:</label>
+									<p>{{i.domaine}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Activité:</label>
+									<p id="act">{{i.activites}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Num de Securité Scoiale:</label>
+									<p>{{i.numSecScoiale}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										activiteSimulat:</label>
+									<p>{{i.activiteSimulat}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Regime d'assurance:</label>
+									<p>{{i.regimeAssurance}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Telephone:</label>
+									<p>{{i.telephone}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Fax:</label>
+									<p>{{i.fax}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<label style="float: left;">
+										Email:</label>
+									<p>{{i.email}}</p>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col">
+									<label style="float: left;">
+										Fait le:</label>
+									<p>{{i.date|date("m/d/Y")}}</p>
+								</div>
+								<div class="col">
+									<label style="float: left;">
+										Au:</label>
+									<p>{{i.fait}}</p>
+								</div>
+							</div>
+							<button class="btn btn-info">
+								<a style="color:white" href="{{path('delete',{'id': i.id })}}">Confirmer</a>
+							</button>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</center>
+
+	{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "home/home.html.twig" %}
+{% block title %}Paiement
+{% endblock %}
+
+
+{% block body %}
+	<center class="container fluid col-10 mt-5 ">
+
+		<div id="colorlib-main" class=' mt-3'>
+			<h1 class="h3 mb-3 font-weight-normal ">Declaration et Paiement</h1>
+			<div class=' mt-3 border'>
+				<p>Ma Declaration fait avant :</p>
+				<p>Mon Paiement fait avant :</p>
+			</div>
+			<div class=' mt-3 border'>
+				<div class=' mt-3'>
+					<strong class="mt-3">Mon chiffre d'affaire</strong>
+					<input type="number" class="mt-3">
+				</div>
+                <div class=' mt-3 ml-4'>
+				<strong class="mt-3">Montant a payer
+				</strong>
+				<input type="number" class="mt-3">
+                </div>
+                <div class=' mt-3'>
+				<button class="btn btn-success">
+					Valider</button>
+                    </div>
+			</div>
+		</center>
+	{% endblock %}
