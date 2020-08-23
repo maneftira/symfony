@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+			<title>Accueil - Autoentrepreneur.urssaf.fr</title>
+		
+
+	<link href="/portail/modules/webaeTemplates/img/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+	<link rel="apple-touch-icon" sizes="180x180" href="/portail/modules/webaeTemplates/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/portail/modules/webaeTemplates/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/portail/modules/webaeTemplates/img/favicon-16x16.png">
+	<link rel="manifest" href="/portail/modules/webaeTemplates/img/site.webmanifest">
+	<link rel="mask-icon" href="/portail/modules/webaeTemplates/img/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="/portail/modules/webaeTemplates/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+
+	
+
+
+
+
+	<script type="text/javascript" src="/portail/modules/webaeTemplates/javascript/jquery-3.3.1.min.js"></script>
+	
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+	// V1.1
+	// Constantes d'environnement
+	var CONST_ENV_WORK = 'prod';
+	var CONST_PAGE_S2 = 1;
+	var CONST_MAIN_DOMAIN = '.urssaf.fr';
+	var CONST_CURRENT_DOMAIN = 'autoentrepreneur.urssaf.fr';
+	var DEBUG = (CONST_ENV_WORK === 'preprod')?true:false;
+	
+	function acossAddEventForTMS(evnt, elem, func) {
+		if (elem.addEventListener)  // W3C DOM
+			elem.addEventListener(evnt,func,false);
+		else if (elem.attachEvent) { // IE DOM
+			elem.attachEvent("on"+evnt, func);
+		}
+		else { // No much to do
+			elem["on"+evnt] = func;
+		}
+	}
+	
+	function acossFormatingForTMS(texte, isurl) {
+		var texteFormated = "";
+
+		if(typeof isurl === "undefined") {
+			// mettre en minuscule
+			texteFormated = texte.toLowerCase();
+			// retirer tous les espaces en debut ou fin de string
+			texteFormated = texteFormated.trim();
+			// Les espaces placés au mileu sont remplacés par des underscores
+			texteFormated = texteFormated.replace(/ /g, "_"); 
+			
+			// - remplacer tous les accents par leur valeurs sans accent
+			var map = {
+				'a': 'À|Á|Â|Ã|Ä|Å|à|á|â|ã|ä|å',
+				'e': 'È|É|Ê|Ë|è|é|ê|ë|ð',
+				'i': 'Ì|Í|Î|Ï|ì|í|î|ï',
+				'o': 'Ò|Ó|Ô|Õ|Õ|Ö|Ø|ò|ó|ô|õ|ö|ø',
+				'u': 'Ù|Ú|Û|Ü|ù|ú|û|ü',
+				'c': 'ç|Ç',
+				'd': 'Ð',
+				'n': 'ñ|Ñ',
+				's': 'Š|š|ß',
+				'y': 'Ÿ|ÿ|ý',
+				'z': 'Ž|ž'
+			};
+
+			for (var pattern in map) {
+				texteFormated = texteFormated.replace(new RegExp(map[pattern], 'g'), pattern);
+			};
+			
+			// Enfin je mets des "_" pour tout ce qui n'est pas alphanumerique
+			texteFormated = texteFormated.replace(/[\W_]+/g, "_");
+		}
+		// C'est une url
+		else {
+			texteFormated = encodeURIComponent(texte);
+		}
+		return texteFormated;
+	}
+
+	// Récupération des données à passer pour la page
+	var pageName = "";
+	var pageCat1Name = "";
+	var pageCat2Name = "";
+	var pageCat3Name = "";
+	var pageUrl = window.location.href;
+	var pageReferrer = "";
+	var formObject = "";
+	var pageReferrer = document.referrer;
+	var searchKeyword = "";
+	var searchResultPageNumber = "";
+
+	// Travail sur l'url pour récupérer les différents éléments
+	var pathname = window.location.pathname;
+
+	// Suppression de la 1ere partie
+	pathname = pathname.replace("/portail/cms/render/default/fr/sites/siteae/accueil/", '');
+	pathname = pathname.replace("/portail/sites/sitae/accueil/", '');
+	pathname = pathname.replace("/portail/accueil/", '');
+	pathname = pathname.replace("/portail/cms/render/default/fr/sites/siteae/", '');
+	pathname = pathname.replace("/portail/sites/sitae/", '');
+	pathname = pathname.replace("/portail/", '');
+	
+	var pathnameArray = pathname.split('/');
+	if(pathnameArray.length > 0) {
+		var last_part = pathnameArray[pathnameArray.length - 1];
+
+		// nom de la page : prendre la dernière partie de l'url xxxxxxxxx.html et la formater
+		if (last_part) {
+			var filename = last_part.split('.html');
+			if (filename) 
+				pageName = filename[0];
+		}
+
+		// On alimente alors que les 3 1ers dossiers dans le chapitrage
+		if(pathnameArray[0] && pathnameArray[0].indexOf(".html") == -1) pageCat1Name = pathnameArray[0];
+		if(pathnameArray[1] && pathnameArray[1].indexOf(".html") == -1) pageCat2Name = pathnameArray[1];
+		if(pathnameArray[2] && pathnameArray[2].indexOf(".html") == -1) pageCat3Name = pathnameArray[2];
+	}
+	
+	// PARTIE AUTHENTIFICATION
+	// Cas particulier : surcharge du type de page dans le cas de la création de compte 
+	if(acossFormatingForTMS(pageName)==="creer_mon_compte") CONST_PAGE_S2 = 3;
+
+	// Enrichissement du dataLayer
+	var tc_vars = {
+		env_work : CONST_ENV_WORK,
+		page_s2 : CONST_PAGE_S2,
+		user_id : '',
+		user_category : '',
+		alert_start_user_session_status : '',
+		alert_end_user_session_status : '',
+		user_mandate_status : '',
+		user_periodicity_status : '',
+		user_login_status : ''
+	};
+
+	$(document).ready(function () {
+		// Voir avec Guillaume AUTHENTIFICATION - à reporter
+		$('form.identification label[for="compte_id"]').text('Courriel ou N° de Sécurité sociale (13 chiffres)'); 
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// TMS - EVENEMENTS - ACCORDEON
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Géstion du clic sur le bouton "Tout déplier"
+		$(".accordeon_tools button").first().on('click', function() {
+			var clicType = "navigation";
+			var clickName = "tout_deplier";
+			var clickCat1Name = pageName;
+			var clickCat2Name = "";
+			var clickCat3Name = "";
+			if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) 
+				tC.container.reload({events: {click: [{}, {
+					'click_type': acossFormatingForTMS(clicType),
+					'click_name': acossFormatingForTMS(clickName),
+					'click_cat1_name': acossFormatingForTMS(clickCat1Name),
+					'click_cat2_name': acossFormatingForTMS(clickCat2Name),
+					'click_cat3_name': acossFormatingForTMS(clickCat3Name)
+				}]}});
+		});
+
+		// Gestion des clics accordeons
+		$(".theme_questions button[data-toggle='collapse']").on('click', function (event) {
+			var currentElement = $( event.currentTarget );
+			var clicType = "navigation";
+			var clickName = "";
+			var clickCat1Name = pageName;
+			var clickCat2Name = "";
+			var clickCat3Name = "";
+
+			if (currentElement.attr('aria-expanded') === 'false') {
+				// Je récupère l'élément parent de type HTMLHeadingElement le plus proche et vérifie son niveau
+				var headingElement = $(currentElement).parent();
+				if (headingElement && headingElement[0] instanceof HTMLHeadingElement) {
+					var buttonElement = $(headingElement[0]).find("button");
+
+					// Si le bouton à un H2 comme element parent alors c'est un niveau 1
+					if (headingElement[0].tagName == "H2") {
+						if (buttonElement)
+							clickName = $(buttonElement[0]).attr("id");
+					}
+					// Si le bouton à un H3 comme element parent alors c'est un niveau 2
+					else if (headingElement[0].tagName == "H3") {
+						if (buttonElement) {
+							clickName = $(buttonElement[0]).attr("id");
+							var h2ButtonParent = $(buttonElement[0]).closest(".theme_questions").find('h2 button');
+							if (h2ButtonParent) clickCat2Name = $(h2ButtonParent[0]).attr("id");
+						}
+					}
+					// Si le container existe alors on envoi l'événement
+					if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) {
+						tC.container.reload({events: {click: [{}, {
+							'click_type': acossFormatingForTMS(clicType),
+							'click_name': acossFormatingForTMS(clickName),
+							'click_cat1_name': acossFormatingForTMS(clickCat1Name),
+							'click_cat2_name': acossFormatingForTMS(clickCat2Name),
+							'click_cat3_name': acossFormatingForTMS(clickCat3Name)
+						}]}});
+					}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - EVENEMENTS - ACCORDEON");}
+				}
+				else {
+					// On est pas dans l'accordeon
+				}
+			}
+		});
+
+
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// TMS - EVENEMENTS - CLICK
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		var links = document.querySelectorAll("a");
+		for (i = 0; i < links.length; ++i) {
+			var target = links[i].getAttribute("target");
+			var href = links[i].href;
+			
+			////////////////////////////////////////////////////////////
+			// CONTACT TELEPHONE
+			////////////////////////////////////////////////////////////
+			if(href.indexOf("tel:") === 0) {
+				acossAddEventForTMS("click", links[i], function(event){
+					var clicType = "action";
+					var clickName = "";
+					var clickCat1Name = "contact_telephone";
+					var clickCat2Name = "";
+					var clickCat3Name = "";
+					
+					var element = event.target;
+					var numeroTelephone = event.currentTarget.href.replace("tel:",'');
+					clickName = numeroTelephone.replace("+",'00');
+					
+					// Si je suis dans la page de contact j'ajoute des informations
+					if(pageUrl.indexOf("/telephone.html") !=-1) {
+						// #vous-etes-artisan-ou-commercant-contenu = activite_artisan_ou_commercant
+						// #vous-exercez-une-activite-libera-contenu = activite_liberale
+						if(($(element).parents("#vous-etes-artisan-ou-commercant-contenu").length) || ($(element).parents("#vous-exercez-une-activite-libera-contenu").length)) {
+							clickCat2Name = "auto_entrepreneur";
+							if($(element).parents("#vous-etes-artisan-ou-commercant-contenu").length)
+								clickCat3Name = "activite_artisan_ou_commercant";
+							else if($(element).parents("#vous-exercez-une-activite-libera-contenu").length)
+								clickCat3Name = "activite_liberale";
+						}
+						// Sinon on est pas AE
+						else 
+							clickCat2Name = "non_auto_entrepreneur";
+					}
+					
+					if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) {
+						tC.container.reload({events: {click: [{},{
+							'click_type':acossFormatingForTMS(clicType),
+							'click_name':acossFormatingForTMS(clickName),
+							'click_cat1_name':acossFormatingForTMS(clickCat1Name),
+							'click_cat2_name':acossFormatingForTMS(clickCat2Name),
+							'click_cat3_name':acossFormatingForTMS(clickCat3Name)
+						}]}});
+					}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - CONTACT TELEPHONE");}
+				});				
+			}
+			
+
+			
+			////////////////////////////////////////////////////////////
+			// PUBLISHER
+			////////////////////////////////////////////////////////////
+			else if(links[i].parentNode && links[i].parentNode.className && links[i].parentNode.className.split(' ').indexOf('partage')>=0) {
+				acossAddEventForTMS("click", links[i], function(event){
+					var pubCampaignId = "interaction";
+					var pubCreation = "";
+					var pubVariant = "";
+					var pubFormat = "";
+					var pubGeneralPlacement = pageName;
+					var h1 = "";
+					var h2 = "";
+					var element = event.target;
+
+					// Si on est dans une page d'article
+					if(pageUrl.indexOf("/toutes-les-actualites/") !=-1) {
+						h1 = $.find('h1');
+						pubFormat = $("h1").html();
+					}
+					else {
+						h2 = $(element.parentNode).find('h2');
+						if(h2) pubFormat = $(h2).text();
+					}
+
+					// Si c'est du partage réseaux sociaux
+					if(element.className.indexOf('partage_')>=0 || $(element).hasClass('facebook') || $(element).hasClass('twitter') || $(element).hasClass('linkedin')) {
+						pubCreation = 'partage';
+						
+						// Si c'est une div alors il faut le parent du parent
+						if(element.className.indexOf('partage_')>=0) {
+							h2 = $(element.parentNode.parentNode).find('h2');
+							if(h2) pubFormat = $(h2).text();
+						} else {
+							h2 = $(element.parentNode.parentNode.parentNode).find('h2');
+							if(h2) pubFormat = $(h2).text();
+						}
+						
+						if($(element).hasClass('partage_facebook') || $(element).hasClass('facebook')) {
+							pubVariant = "facebook";
+						}else if($(element).hasClass('partage_twitter') || $(element).hasClass('twitter')) {
+							pubVariant = "twitter";
+						}else if($(element).hasClass('partage_linkedin') || $(element).hasClass('linkedin')) {
+							pubVariant = "linkedin";
+						}
+					}
+					// Si c'est un partage par mail
+					else if($(element).hasClass('mail') || ($(element).children() && $(element).children().hasClass('mail'))) {
+						pubCreation = 'partage';
+						pubVariant = "email";
+					}
+					// Si c'est une impression
+					else if($(element).hasClass('imprimer') || ($(element).children() && $(element).children().hasClass('imprimer'))) {
+						pubCreation = 'impression';
+					}
+					
+					if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) {
+						tC.container.reload({events: {pub: [{},{
+							'pub_campaign_id':acossFormatingForTMS(pubCampaignId),
+							'pub_creation':acossFormatingForTMS(pubCreation),
+							'pub_variant':acossFormatingForTMS(pubVariant),
+							'pub_format':acossFormatingForTMS(pubFormat),
+							'pub_general_placement':acossFormatingForTMS(pubGeneralPlacement)
+						}]}});
+					}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - PUBLISHER");}
+				});
+			}
+			
+			////////////////////////////////////////////////////////////
+			// LIENS EXTERNES - HORS ACOSS
+			////////////////////////////////////////////////////////////
+			else if(href !== "" && href.indexOf(CONST_MAIN_DOMAIN) == -1){
+				acossAddEventForTMS("click", links[i], function(event){
+					var clicType = 'exit';
+					var clickName = $(event.target).text();
+					var clickCat1Name = event.target.host;
+					var clickCat2Name = event.target.href;
+					var clickCat3Name = pageUrl;
+					if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) {
+						tC.container.reload({events: {click: [{},{
+							'click_type':acossFormatingForTMS(clicType),
+							'click_name': acossFormatingForTMS(clickName),
+							'click_cat1_name': acossFormatingForTMS(clickCat1Name, true),
+							'click_cat2_name': acossFormatingForTMS(clickCat2Name, true),
+							'click_cat3_name': acossFormatingForTMS(clickCat3Name, true)
+						}]}});
+					}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - LIENS EXTERNES");}
+				});
+			}
+
+			////////////////////////////////////////////////////////////
+			// LIENS INTERNES
+			////////////////////////////////////////////////////////////
+			// Tout ce qui est en local, argument target="_blank"
+			else if(target == "_blank") {
+				acossAddEventForTMS("click", links[i], function(event){
+					var element = event.target;
+					var clicType = "download";
+					var clickName = $(element).text();
+					var clickCat1Name = "";
+					var clickCat2Name = "";
+					var clickCat3Name = pageUrl;
+
+					if(!(element instanceof HTMLAnchorElement)) {
+						if(!(element.parentNode instanceof HTMLAnchorElement)) {
+							if(element.parentNode.parentNode instanceof HTMLAnchorElement) {
+								element = element.parentNode.parentNode;
+							}
+						}else {
+							element = element.parentNode;
+						}
+					}
+
+					if(element instanceof HTMLAnchorElement) {
+						// CONSULTATION : GUIDE OFFICIEL
+						if((element.href).indexOf("/files/Guides/Flip/") !=-1) {
+							clickCat1Name = "guide_officiel"; 
+							clicType = "action";
+							if((acossFormatingForTMS(clickName)).indexOf("metropole") !=-1) clickCat2Name = "metropole";
+							else clickCat2Name = "dom";
+						}
+						// TELECHARGEMENT : GUIDE OFFICIEL ET DOCUMENT UTILE
+						else if((element.href).indexOf("/files/Guide_") !=-1) {
+							clickCat1Name = "guide_officiel";
+							if((acossFormatingForTMS(clickName)).indexOf("metropole") !=-1) clickCat2Name = "metropole";
+							else clickCat2Name = "dom";
+						}
+						else if((element.href).indexOf("/files/DocsUtiles/") !=-1 || (element.href).indexOf("/files/Modeles/") !=-1) clickCat1Name = "document_utile";
+
+						// Je ne trace que les liens voulus
+						if (clickCat1Name != "" && typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) {
+							tC.container.reload({events: {click: [{},{
+								'click_type':acossFormatingForTMS(clicType),
+								'click_name':acossFormatingForTMS(clickName),
+								'click_cat1_name':acossFormatingForTMS(clickCat1Name),
+								'click_cat2_name':acossFormatingForTMS(clickCat2Name),
+								'click_cat3_name':acossFormatingForTMS(clickCat3Name, true)
+							}]}});
+						}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - LIENS INTERNES");}
+					}
+				});
+			}
+		}
+
+
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// TMS - PAGES VUES
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Si le container existe alors on envoi l'événement de page vue
+		if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container && typeof pageName !== "undefined" && pageName !== "") {
+			// Si page de recherche
+			if(pageUrl.indexOf('resultats-de-votre-recherche.html') != -1 || pageUrl.indexOf('resultats-de-votre-recherche.default.html') != -1) 
+			{
+				searchKeyword = $("#search").val();
+				searchResultPageNumber="0";
+				if($("section.recherche .resultsList .bloc_resultat").length > 0) searchResultPageNumber = "1";
+				if($(".pagination .page-item.active .page-link").length > 0) searchResultPageNumber = $(".pagination .page-item.active .page-link").text();
+			}
+			tC.container.reload({events: {page: [{}, {
+				'page_name': acossFormatingForTMS(pageName),
+				'page_url': acossFormatingForTMS(pageUrl, true),
+				'page_cat1_name': acossFormatingForTMS(pageCat1Name),
+				'page_cat2_name': acossFormatingForTMS(pageCat2Name),
+				'page_cat3_name': acossFormatingForTMS(pageCat3Name),
+				'page_referrer': acossFormatingForTMS(pageReferrer, true),
+				'search_keywords': acossFormatingForTMS(searchKeyword),
+				'search_page_number': acossFormatingForTMS(searchResultPageNumber)
+			}]}});
+		}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - PAGES VUES");}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// TMS - PAGES VUES - VIRTUELLES
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Page virtuelle d'envoi de message 
+		// Capter le retour de demande = modalMaker crée une modal : #contact-modal
+		// si erreur : 'modalClass' = 'modal-error' 
+		$(document).on('show.bs.modal', '#contact-modal', function (event) {
+			var formObject = $("form#contact select#rubriqueId option:selected").text();
+			var typeReponse = 'ok';
+			var hasError = $(this).find(".modal-error");
+			if(hasError.length > 0) typeReponse = 'ko';
+
+			// Ajout du virtual dans l'url pour le distinguer des autres pages
+			var urlArray = pageUrl.split(".html");
+			if(urlArray && urlArray.length == 1) 
+				pageUrl = urlArray[0] + '_virtual_' + typeReponse + '.html';
+			else if(urlArray && urlArray.length > 1) 
+				pageUrl = urlArray[0] + '_virtual_' + typeReponse + '.html' + urlArray[1];
+
+			if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) {
+				tC.container.reload({events: {page: [{}, {
+					'page_name': acossFormatingForTMS('virtual_envoi_message_confirmation'),
+					'page_url': acossFormatingForTMS(pageUrl, true),
+					'page_cat1_name': acossFormatingForTMS(pageCat1Name),
+					'page_cat2_name': acossFormatingForTMS(pageCat2Name),
+					'page_cat3_name': acossFormatingForTMS(pageName),
+					'page_referrer': acossFormatingForTMS(pageReferrer, true),
+					'form_object' : acossFormatingForTMS(formObject),
+				}]}});
+			}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - PAGES VIRTUELLES - #contact-modal");}
+		});
+		
+		/////////////////////////////////////////////////////////////////////////////////////////////////
+		// PARTIE AUTHENTIFICATION
+		// Page virtuelle de création de compte
+		// Capter le retour de demande = modalMaker crée une modal : #contact-modal
+		// si erreur : 'modalClass' = 'modal-error' 
+		$(document).on('show.bs.modal', '#creation-compte-modal', function (event) {
+			var typeReponse = 'ok';
+			var hasError = $(this).find(".modal-error");
+			if(hasError.length > 0) typeReponse = 'ko';
+
+			// Ajout du virtual dans l'url pour le distinguer des autres pages
+			var urlArray = pageUrl.split(".html");
+			if(urlArray && urlArray.length == 1) 
+				pageUrl = urlArray[0] + '_virtual_' + typeReponse + '.html';
+			else if(urlArray && urlArray.length > 1) 
+				pageUrl = urlArray[0] + '_virtual_' + typeReponse + '.html' + urlArray[1];
+
+			if (typeof tC !== "undefined" && tC && typeof tC.container !== "undefined" && tC.container) {
+				tC.container.reload({events: {page: [{}, {
+					'page_name': acossFormatingForTMS('virtual_tunnel_inscription_compte_etape_confirmation'),
+					'page_url': acossFormatingForTMS(pageUrl, true),
+					'page_cat1_name': acossFormatingForTMS(pageCat1Name),
+					'page_cat2_name': acossFormatingForTMS(pageCat2Name),
+					'page_cat3_name': acossFormatingForTMS(pageName),
+					'page_referrer': acossFormatingForTMS(pageReferrer, true)
+				}]}});
+			}else { if(DEBUG) console.log("ERREUR : tC ou tC.container ne sont pas defini - PAGES VIRTUELLES - #creation-compte-modal");}
+		});
+		// Page virtuelle de création de compte
+		// Capter le retour de demande = modalMaker crée une modal : #contact-modal
+		// si erreur : 'modalClass' = 'modal-error' 
+		
+	});
+
+//]]>
+</script>
+<script type="text/javascript" src="https://cdn.tagcommander.com/4736/tc_Acoss_20.js"></script>
+
+<meta name="description" content="Effectuez gratuitement les formalités de création de votre activité."/>
+
+<script type="text/javascript">
+var contextJsParameters={contextPath:"/portail",lang:"fr",uilang:"fr",siteUuid:"63bfaead-2d57-4694-aec0-35ebed4937c3",wcag:true,ckeCfg:""}; var CKEDITOR_BASEPATH="/portail/modules/ckeditor/javascript/"; var scayt_custom_params=new Array(); scayt_custom_params['sLang']='fr_FR';
+</script>
+<link id="staticAssetCSS0" rel="stylesheet" href="/portail/modules/webaeTemplates/css/bootstrap.min.css" media="screen,print" type="text/css"/>
+<link id="staticAssetCSS1" rel="stylesheet" href="/portail/modules/webaeTemplates/css/lautoentrepreneur.css" media="screen,print" type="text/css"/>
+<link id="staticAssetCSS2" rel="stylesheet" href="/portail/modules/webaeTemplates/css/custom.css" media="screen,print" type="text/css"/>
+<link id="staticAssetCSS3" rel="stylesheet" href="/portail/generated-resources/ff6e54ce51ab8d644deb52aa2f788e7.min.css" media="print" type="text/css"/>
+<link id="staticAssetCSS4" rel="stylesheet" href="/portail/generated-resources/b58ce56f3e2e53401ace6de21b46ec.min.css" media="screen" type="text/css"/>
+<script id="staticAssetJavascript0" type="text/javascript" src="/portail/generated-resources/fb69243b1dcbd67d13ea1ec2ac9ba17e.min.js"></script>
+
+
+<script type="text/javascript">
+
+function rechercheResultats (searchString, listbox) {
+
+	var results = [];
+
+	if(searchString.length>=3){
+
+	  var waitingResult = false;
+
+	  $.ajax({
+			url: "/portail/accueil.autocompleteAction.do",
+			dataType: "json",
+			async: true,
+			data :{
+				q: searchString,
+				removeDuplicatePropValues: true,
+				propertyMatchRegexp: searchString
+			},
+			success: function(data) {
+				waitingResult=false;
+
+				var RESULTATS = data;
+				var regex = new RegExp("("+searchString.trim().replace().replace(/ /g, '|')+")","gi")
+
+				for (var i = 0; i < RESULTATS.length; i++) {
+		    	    var resultat = RESULTATS[i].toLowerCase();
+
+		    	    if(regex.test(RESULTATS[i])){
+		    	    	results.push('<span>'+RESULTATS[i].replace(regex,"<span class=\"chaine_recherchee\">$1</span>")+'</span>');
+		    	    }
+		    	  }
+				if(listbox.input.value==searchString){
+					listbox.updateResultsWithoutSearch(results)
+				}
+			},
+			beforeSend : function(){
+				waitingResult= true;
+			},
+			complete : function() {
+				waitingResult= false;
+			}
+		});
+	}
+	;
+}
+
+
+$(document).ready(function(){
+
+	  var ex1Combobox = new aria.ListboxCombobox(
+		document.getElementById('recherche-combobox'),
+	    document.getElementById('search'),
+	    document.getElementById('liste_suggestions_recherche'),
+	    rechercheResultats,
+	    false
+	  );
+});
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://www.autoentrepreneur.urssaf.fr/",
+  "potentialAction": {
+    "@type": "SearchAction",
+     "target": "https://www.autoentrepreneur.urssaf.fr/portail/accueil/resultats-de-votre-recherche.html?jcrMethodToCall=get&src_originSiteKey=siteae&src_terms%5B0%5D.applyFilter=true&src_terms%5B0%5D.match=all_words&src_terms%5B0%5D.fields.siteContent=true&src_terms%5B0%5D.fields.tags=true&src_terms%5B0%5D.fields.files=true&src_sites.values=siteae&src_sitesForReferences.values=systemsite&src_languages.values=fr&src_terms%5B0%5D.term={search_term}",
+     "query-input": "required name=search_term"
+  }
+}
+</script>
+
+<script id="staticAssetAggregatedJavascriptList0" type="text/javascript">
+var jASAJ=jASAJ || new Array();
+jASAJ.push('/portail/modules/webaeTemplates/javascript/popper.js');
+jASAJ.push('/portail/modules/webaeTemplates/javascript/bootstrap.js');
+jASAJ.push('/portail/modules/webaeTemplates/javascript/validationFormulaire.js');
+jASAJ.push('/portail/modules/webaeComposants/javascript/aria-utils.js');
+jASAJ.push('/portail/modules/webaeComposants/javascript/listbox-combobox.js');
+</script>
+
+</head>
+<body>
+	
+	<!--[if lt IE 9]>
+	  <div style="background-color: #e00; color: white; padding: 10px; text-align: center; font-weight: bold; z-index: 1000;">
+	    Vous utilisez un navigateur trop ancien.<br />Pour profiter pleinement de ce site, nous vous recommandons de <a href="https://www.browser-update.org/fr/update.html" target="_blank" title="mettre à jour votre navigateur - Nouvelle fenêtre" style="color: #000;">mettre à jour votre navigateur</a>.
+	  </div>
+	<![endif]-->
+	
+	<header>
+		
+		<div class="acces_rapides">
+			<div class="container">
+				<ul class="row navbar-nav flex-sm-row justify-content-sm-between">
+					<li class="nav-item"><a href="#contenu" class="nav-link">Aller au contenu</a></li>
+					<li class="nav-item d-none d-sm-block"><a href="#search" class="nav-link">Aller à la recherche</a></li>
+					<li class="nav-item d-none d-sm-block"><a href="#menu" class="nav-link">Aller au menu principal</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="bandeau_sup">
+			<div class="container">
+				<div class="row header">
+					
+					<div class="col-5 col-sm-4 bloc_logo">
+						
+						<a class="navbar-brand align-bottom" title="Retourner à la page d’accueil" href="/portail/accueil.html"><img src="/portail/modules/webaeTemplates/img/logo-AE.svg" alt="Auto entrepreneur - Un service des Urssaf" title="Retourner à la page d’accueil"/></a>
+					</div>
+					
+					<div class="col-7 col-sm-8 align-self-sm-end align-self-sm-center text-right bloc_compte mobile_boutons">
+						<button id="bouton_mon_compte" type="button"
+	class="dropdown-toggle btn-mon-compte" data-toggle="dropdown"
+	aria-haspopup="true" aria-expanded="false"
+	aria-label="Basculer le panneau 'Mon compte'"
+	onclick="$('#myNavbar').removeClass('show');$('.btn-menu').attr('aria-expanded','false');"
+	style="display: none;">
+	<span class="d-none d-sm-inline-block"> <span class="bloc_nom"
+		id="prenomUser"></span>
+	<!-- Le prénom est tronqué automatiquement suivant la largeur disponible -->
+		<span class="bloc_nom" id="nomUser"></span>
+	<!-- Le nom est tronqué automatiquement suivant la largeur disponible -->
+	</span> <span> <!-- Attention à bien préciser le nombre de notifications dans l'attribut data-value en plus de la valeur dans la balise span -->
+		<span id="nbnotif" class="notifications"></span> <img
+		src="/portail/modules/webaeTemplates/img/icones/mon_compte_avatar.svg"
+		alt="">
+	</span>
+</button>
+<!-- Lorsque l'utilisateur est connecté, on ajoute le menu déroulant pour accéder au compte -->
+<div id="mon_compte" class="dropdown-menu"
+	aria-labelledby="bouton_mon_compte">
+	<div class="bande_triangle">
+		<div class="triangle"></div>
+	</div>
+	<div class="zone_menu_compte">
+		<nav class="menu_compte">
+			<div class="bloc_nom_mobile" id="prenomNomUserMobile"></div>
+			<ul>
+				<li><a
+					href="https://autoentrepreneur.urssaf.fr/services/"><img
+						src="/portail/modules/webaeTemplates/img/icones/TABLEAU_BORD_48X48_ORANGE.svg"
+						alt="">Mon espace personnel</a></li>
+				<!-- Attention à bien préciser le nombre de notifications dans l'attribut data-value en plus de la valeur dans la balise span -->
+				<li><a
+					href="https://autoentrepreneur.urssaf.fr/services/espace-personnel/mon-compte/mes-parametres">
+						<img
+						src="/portail/modules/webaeTemplates/img/icones/mes_parametres.svg"
+						alt="">Mes param&egrave;tres
+				</a></li>
+			</ul>
+			<ul>
+				<li><a
+					href="https://autoentrepreneur.urssaf.fr/services/logout"><img
+						src="/portail/modules/webaeTemplates/img/icones/DECONNEXION_48X48.svg"
+						alt="">D&eacute;connexion</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+
+<a href="https://autoentrepreneur.urssaf.fr/services/"
+	id="bouton_mon_compte_deconnecte"
+	class="d-sm-flex justify-content-sm-end align-items-sm-center btn-mon-compte">
+	<span class="d-none d-sm-inline">Mon compte</span><img
+	src="/portail/modules/webaeTemplates/img/icones/mon_compte.svg"
+	alt="">
+</a>
+
+
+<script type="text/javascript">
+	try {
+
+
+		if ("id_token_expires_at" in localStorage
+				&& "user_firstname" in localStorage
+				&& "user_lastname" in localStorage) {
+
+			var dateexp = localStorage.getItem('id_token_expires_at');
+			var user_firstname = localStorage.getItem("user_firstname");
+			var user_lastname = localStorage.getItem("user_lastname");
+			var nb_notif = 0;
+			if ("nb_notif" in localStorage) {
+				nb_notif = localStorage.getItem("nb_notif");
+			}
+
+			var date = new Date();
+			var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
+					date.getUTCDate(), date.getUTCHours(),
+					date.getUTCMinutes(), date.getUTCSeconds());
+			var now_local = Date.UTC(date.getFullYear(), date.getMonth(), date
+					.getDate(), date.getHours(), date.getMinutes(), date
+					.getSeconds());
+
+			//on compare a la date now utc car cote webAEBDS les dates sont en UTC
+			if (dateexp > now_utc) {
+				document.getElementById("bouton_mon_compte_deconnecte").parentNode
+						.removeChild(document
+								.getElementById("bouton_mon_compte_deconnecte"));
+				document.getElementById("bouton_mon_compte").style.display = 'inline-block';
+				document.getElementById("prenomUser").innerHTML = user_firstname;
+				document.getElementById("nomUser").innerHTML = user_lastname;
+				if (nb_notif > 0) {
+					document.getElementById("nbnotif").innerHTML = nb_notif;
+				}
+				document.getElementById("prenomNomUserMobile").innerHTML = user_firstname
+						+ " " + user_lastname;
+			} else {
+				//	cas expire
+				console.log('session expiree');
+			}
+		} else {
+			//cas param non present dans localStorage autres params
+			console.log("pas de user_firstname")
+			if ("id_token_claims_obj" in localStorage
+					&& "id_token_expires_at" in localStorage) {
+				var dateexp = localStorage.getItem('id_token_expires_at');
+				var user_firstAndLastName = JSON.parse(localStorage
+						.getItem('id_token_claims_obj')).name
+				var user_firstname = user_firstAndLastName.split(" ")[0];
+				var user_lastname = user_firstAndLastName.split(" ")[1];
+				var nb_notif = 0;
+				if ("nb_notif" in localStorage) {
+					nb_notif = localStorage.getItem("nb_notif");
+				}
+
+				var date = new Date();
+				var now_utc = Date.UTC(date.getUTCFullYear(), date
+						.getUTCMonth(), date.getUTCDate(), date.getUTCHours(),
+						date.getUTCMinutes(), date.getUTCSeconds());
+				var now_local = Date.UTC(date.getFullYear(), date.getMonth(),
+						date.getDate(), date.getHours(), date.getMinutes(),
+						date.getSeconds());
+
+				//on compare a la date now utc car cote webAEBDS les dates sont en UTC	
+				if (dateexp > now_utc) {
+					document.getElementById("bouton_mon_compte_deconnecte").parentNode
+							.removeChild(document
+									.getElementById("bouton_mon_compte_deconnecte"));
+					document.getElementById("bouton_mon_compte").style.display = 'inline-block';
+					document.getElementById("prenomUser").innerHTML = user_firstname;
+					document.getElementById("nomUser").innerHTML = user_lastname;
+					document.getElementById("prenomNomUserMobile").innerHTML = user_firstname
+							+ " " + user_lastname;
+					if (nb_notif > 0) {
+						document.getElementById("nbnotif").innerHTML = nb_notif;
+					}
+				} else {
+					//	cas expiré
+					console.log('session expiree');
+				}
+			} else {
+				console
+						.log("ni user_firstname et ni id_token_claims_obj dans le localstorage");
+			}
+		}
+	} catch (error) {
+		document.getElementById("bouton_mon_compte").parentNode
+				.removeChild(document.getElementById("bouton_mon_compte"));
+		console.error(error);
+	}
+</script><div class="clear"></div>
+						<button type="button" class="navbar-toggler btn-menu d-sm-none" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Basculer le menu" onclick="$('#mySearch').collapse('hide');$('#connect').collapse('hide');$('#mon_compte').collapse('hide');">
+							<img src="/portail/modules/webaeTemplates/img/icones/menu.svg"  alt="Menu"/>
+				        </button>
+					</div>
+					<!-- Entête - Bandeau blanc : Sauf mobile : identification et création de compte (ou informations si connecté) -->
+					
+				</div>
+<!-- 		<div class="row navbar p-0"> -->
+
+<!-- 		</div> -->
+
+		<div class="row p-0">
+			<section class="col-12 navbar-collapse collapse" id="connect">
+			</section>
+<!-- 			Partie connectée -->
+			<div class="offset-sm-5 offset-lg-7" id="localConnect" style="display:none">
+				<div class="navbar-collapse collapse" id="mon_compte" style="">
+					<div class="bande_triangle">
+						<div class="triangle"></div>
+					</div>
+					<div class="zone_menu_compte">
+						<div class="menu_compte">
+							<div class="bloc_nom_mobile" id="userName"></div>
+							<ul>
+								<li><a href=""><img src="/portail/modules/webaeTemplates/img/icones/TABLEAU_BORD_48X48_ORANGE.svg" alt="">Mon espace personnel</a></li>
+<!-- 								Attention à bien préciser le nombre de notifications dans l'attribut data-value en plus de la valeur dans la balise span -->
+								<li>
+									<a href="#">
+										<img src="/portail/modules/webaeTemplates/img/icones/mes_parametres.svg" alt="">Mes param&egrave;tres
+									</a>
+								</li>
+							</ul>
+							<ul>
+								<li><a href=""><img src="/portail/modules/webaeTemplates/img/icones/DECONNEXION_48X48.svg" alt="">D&eacute;connexion</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+<script type="text/javascript">
+	try{
+		sessionStorage.setItem('userName','Jean#DUPOND');
+
+		if("userName" in sessionStorage){
+			document.getElementById("connect").parentNode.removeChild(document.getElementById("connect"));
+			document.getElementById("localConnect").style.display = 'block';
+			document.getElementById("userName").innerHTML = sessionStorage.getItem('userName');
+			}
+		else{
+			console.log("Rien trouvé dans le storage")
+		}
+	}catch(error){
+		console.error(error);
+		document.getElementById("connect").style.display = '';
+		document.getElementById("localConnect").parentNode.removeChild(document.getElementById("localConnect"));
+	}
+</script>
+				<div class="navbar navbar-expand-sm menu_hamburger">
+					<div class="navbar-collapse collapse" id="myNavbar">
+						<div class="d-flex flex-column-reverse flex-sm-column bloc_menu_recherche">
+							<nav id="menu" class="d-sm-flex align-items-sm-center ligne_menu">
+								<div class="bloc_menu mr-sm-auto">
+			 						<ul class="navbar-nav">
+	
+				<li class="nav-item"><a class="nav-link" href="/portail/accueil/sinformer-sur-le-statut/lessentiel-du-statut.html" >S'informer <br class="d-none d-sm-block d-lg-none">sur le statut</a></li>
+			
+				<li class="nav-item"><a class="nav-link" href="/portail/accueil/creer-mon-auto-entreprise.html" >Cr&eacute;er <br class="d-none d-sm-block d-lg-none">mon auto-entreprise</a></li>
+			
+				<li class="nav-item"><a class="nav-link" href="/portail/accueil/gerer-mon-auto-entreprise.html" >G&eacute;rer <br class="d-none d-sm-block d-lg-none">mon auto-entreprise</a></li>
+			
+
+</ul>
+								</div>
+								<div class="bloc_question">
+									<a href="/portail/accueil/une-question.html" target="_self" >Une <br class="d-none d-sm-block d-md-none">question<img src="/portail/files/picto_question.svg" alt=""/></a><div class="clear"></div>
+								</div>
+							</nav>
+							<div class="row ligne_recherche m-0">
+								
+								<div class="col-sm-10 col-md-8 col-lg-6 m-auto" id="mySearch">
+									<form role="form" method="post" name="searchForm" action="/portail/accueil/resultats-de-votre-recherche.html" class="form-inline" >
+    <input type="hidden" name="jcrMethodToCall" value="get" />
+    <input type="hidden" name="src_originSiteKey" value="siteae"/>
+    
+		<div class="combobox-wrapper">
+			
+			<div id="recherche-combobox" role="combobox" aria-expanded="false" aria-owns="liste_suggestions_recherche" aria-haspopup="listbox">
+				<input autocomplete="off" name="src_terms[0].term" id="search" placeholder="ex. : déclarer et payer mes cotisations, obtenir une attestation..." title="Indiquer les termes à rechercher sur le site (ex. : déclarer et payer mes cotisations, obtenir une attestation...)" class="form-control rounded-left" value="" aria-autocomplete="list" aria-controls="liste_suggestions_recherche" aria-activedescendant="" type="search">
+				<input name="src_terms[0].applyFilter" value="true" type="hidden">
+				<input name="src_terms[0].match" value="all_words" type="hidden">
+				<input name="src_terms[0].fields.siteContent" value="true" type="hidden">
+				<input name="src_terms[0].fields.tags" value="true" type="hidden">
+				<input name="src_terms[0].fields.files" value="true" type="hidden">
+				<ul id="liste_suggestions_recherche" class="listbox hidden" aria-label="Recherche sur le site" role="listbox">
+                </ul>
+			</div>
+	       	<input type="hidden" name="src_sites.values" value="siteae"/>
+    <input type="hidden" name="src_sitesForReferences.values" value="systemsite"/>
+<input type="hidden" name="src_languages.values" value="fr"/>
+	    	<button type="submit" class="btn rounded-right OK_inline" title="Lancer la recherche">
+				<img src="/portail/modules/webaeTemplates/img/icones/loupe_blanc.svg" alt="Lancer la recherche"/>
+			</button>
+		</div>
+	
+</form>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</header>
+	<div class="container">
+		<main id="contenu">
+     <nav class="row zone_onglets" aria-label="Liste de liens bloc page accueil">
+
+	<a class="col-md-4 bloc_parcours text-center"  href="/portail/accueil/sinformer-sur-le-statut/lessentiel-du-statut.html">
+	<div class="row">
+		<div class="col-2 col-sm-4 col-md-12 p-0">
+			
+			<div class="s_informer"></div>
+		</div>
+		<div class="col-10 col-sm-8 col-md-12 p-sm-0">
+			<div>S&rsquo;informer</div>
+			
+				<div>sur le statut</div>
+			
+			<div>Toutes les informations essentielles pour comprendre le statut auto-entrepreneur</div>
+		</div>
+	</div>
+</a><a class="col-md-4 bloc_parcours text-center"  href="/portail/accueil/creer-mon-auto-entreprise.html">
+	<div class="row">
+		<div class="col-2 col-sm-4 col-md-12 p-0">
+			
+			<div class="creer"></div>
+		</div>
+		<div class="col-10 col-sm-8 col-md-12 p-sm-0">
+			<div>Cr&eacute;er</div>
+			
+				<div>mon auto-entreprise</div>
+			
+			<div>Une inscription simplifi&eacute;e pour devenir auto-entrepreneur en quelques clics</div>
+		</div>
+	</div>
+</a><a class="col-md-4 bloc_parcours text-center"  href="/portail/accueil/gerer-mon-auto-entreprise.html">
+	<div class="row">
+		<div class="col-2 col-sm-4 col-md-12 p-0">
+			
+			<div class="gerer"></div>
+		</div>
+		<div class="col-10 col-sm-8 col-md-12 p-sm-0">
+			<div>G&eacute;rer</div>
+			
+				<div>mon auto-entreprise</div>
+			
+			<div>Un espace personnel d&eacute;di&eacute; pour g&eacute;rer, modifier ou cesser votre activit&eacute; en toute simplicit&eacute;</div>
+		</div>
+	</div>
+</a>
+
+</nav><hr/>
+
+<section class="remonteeContenus">
+
+	
+		<h1 class="separateur">Les derni&egrave;res actualit&eacute;s</h1>
+	
+
+	<div class="row">
+		<div class="col-md-4 bloc_actu">
+	<div class="fond_colore"></div>
+	<a href="/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/nouveau--laide-exceptionnelle-po.html" class="bloc_actu_item">
+		<div class="row flex-md-column flex-md-nowrap">
+			<div class="col-12 col-md-auto order-md-1">
+				<h2>Nouveau&nbsp;: L&rsquo;aide exceptionnelle pour les auto-entrepreneurs professions lib&eacute;rales face &agrave; la crise de la Covid-19</h2>
+				
+				<p class="date">04&nbsp;ao&ucirc;t 2020</p>
+			</div>
+			
+					<div class="col-4 col-md-auto illustration order-md-0">
+						<img src="/portail/files/Actualites/Actu%20aide%20CIPAV2-resize1609x1020.JPG" alt="">
+					</div>
+				
+			<div class="col-8 col-md-auto flex-md-fill order-md-2">
+				
+				<p class="introduction">La Cipav a d&eacute;cid&eacute; d&rsquo;attribuer une aide exceptionnelle pour soutenir ses adh&eacute;rents auto-entrepreneurs et professionnels lib&eacute;raux, ...</p>
+			</div>
+			<div class="offset-4 col-8 offset-md-0 col-md-auto order-md-3">
+              <p class="lien">Lire la suite</p>
+            </div>
+		</div>
+	</a>
+	<div class="partage">
+	<a class="partage_facebook" href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.autoentrepreneur.urssaf.fr%2fportail%2faccueil.html&t=Accueil" target="_blank" title="Partager sur Facebook - Nouvelle fenêtre"><div class="facebook"></div></a>
+	<a class="partage_twitter" href="https://twitter.com/share?url=https%3a%2f%2fwww.autoentrepreneur.urssaf.fr%2fportail%2faccueil.html&text=Accueil&via=www.autoentrepreneur.urssaf.fr" target="_blank" title="Tweeter - Nouvelle fenêtre"><div class="twitter"></div></a>
+</div>
+</div><div class="col-md-4 bloc_actu">
+	<div class="fond_colore"></div>
+	<a href="/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/coronavirus--declarations-de-c-3.html" class="bloc_actu_item">
+		<div class="row flex-md-column flex-md-nowrap">
+			<div class="col-12 col-md-auto order-md-1">
+				<h2>Coronavirus&nbsp;: D&eacute;clarations de chiffres d&rsquo;affaires du mois de juin ou du 2e trimestre 2020</h2>
+				
+				<p class="date">03&nbsp;juillet 2020</p>
+			</div>
+			
+					<div class="col-4 col-md-auto illustration order-md-0">
+						<img src="/portail/files/Fiches_pratiques/Actus%20corona%20juin%202020.JPG" alt="">
+					</div>
+				
+			<div class="col-8 col-md-auto flex-md-fill order-md-2">
+				
+				<p class="introduction">Conform&eacute;ment aux mesures annonc&eacute;es par le Gouvernement dans le cadre de la crise du coronavirus, le r&eacute;seau des Urssaf se ...</p>
+			</div>
+			<div class="offset-4 col-8 offset-md-0 col-md-auto order-md-3">
+              <p class="lien">Lire la suite</p>
+            </div>
+		</div>
+	</a>
+	<div class="partage">
+	<a class="partage_facebook" href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.autoentrepreneur.urssaf.fr%2fportail%2faccueil.html&t=Accueil" target="_blank" title="Partager sur Facebook - Nouvelle fenêtre"><div class="facebook"></div></a>
+	<a class="partage_twitter" href="https://twitter.com/share?url=https%3a%2f%2fwww.autoentrepreneur.urssaf.fr%2fportail%2faccueil.html&text=Accueil&via=www.autoentrepreneur.urssaf.fr" target="_blank" title="Tweeter - Nouvelle fenêtre"><div class="twitter"></div></a>
+</div>
+</div><div class="col-md-4 bloc_actu">
+	<div class="fond_colore"></div>
+	<a href="/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/modalites-de-gestion-de-lechea-1.html" class="bloc_actu_item">
+		<div class="row flex-md-column flex-md-nowrap">
+			<div class="col-12 col-md-auto order-md-1">
+				<h2>Coronavirus&nbsp;: les aides apport&eacute;es aux autoentrepreneurs (Mise &agrave; jour le 08/07/2020)</h2>
+				
+				<p class="date">08&nbsp;juillet 2020</p>
+			</div>
+			
+					<div class="col-4 col-md-auto illustration order-md-0">
+						<img src="/portail/files/Actualites/Coronavirus%20Aides%20AE.jpg" alt="">
+					</div>
+				
+			<div class="col-8 col-md-auto flex-md-fill order-md-2">
+				
+				<p class="introduction">Le Fonds de solidarit&eacute;&nbsp;: Par priorit&eacute;, vous pouvez solliciter, aupr&egrave;s des services des imp&ocirc;ts, l&rsquo;aide pr&eacute;vue par le fonds ...</p>
+			</div>
+			<div class="offset-4 col-8 offset-md-0 col-md-auto order-md-3">
+              <p class="lien">Lire la suite</p>
+            </div>
+		</div>
+	</a>
+	<div class="partage">
+	<a class="partage_facebook" href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.autoentrepreneur.urssaf.fr%2fportail%2faccueil.html&t=Accueil" target="_blank" title="Partager sur Facebook - Nouvelle fenêtre"><div class="facebook"></div></a>
+	<a class="partage_twitter" href="https://twitter.com/share?url=https%3a%2f%2fwww.autoentrepreneur.urssaf.fr%2fportail%2faccueil.html&text=Accueil&via=www.autoentrepreneur.urssaf.fr" target="_blank" title="Tweeter - Nouvelle fenêtre"><div class="twitter"></div></a>
+</div>
+</div>
+	</div>
+
+	
+		<div class="text-right">
+			<a href="/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites.html" class="btn voir_tout">Voir toutes les actualit&eacute;s</a>
+		</div>
+	
+
+</section>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": ["ItemList"],
+    "name": "Accueil",
+    "description": "Contenu de la metadescription",
+    "url": "https://www.autoentrepreneur.urssaf.fr/portail/accueil.html",
+    "numberOfItems": "3",
+    "itemListElement": [
+		{
+	"@type": "NewsArticle",
+	
+		"position": "1",
+	
+	"url": "https://www.autoentrepreneur.urssaf.fr/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/nouveau--laide-exceptionnelle-po.html",
+	"mainEntityOfPage":"https://www.autoentrepreneur.urssaf.fr/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/nouveau--laide-exceptionnelle-po.html",
+	"author": "URSSAF",
+	"datePublished": "2019-01-29",
+	"dateModified": "2019-01-29",
+	"headline": "Nouveau : L’aide exceptionnelle pour les auto-entrepreneurs professions libérales face à la crise de la Covid-19",
+	
+			"image": "https://www.autoentrepreneur.urssaf.fr/portail/files/live/sites/siteae/files/Actualites/Actu%20aide%20CIPAV2-resize1609x1020.JPG",
+		
+
+	"publisher": {
+		"@type": "GovernmentOrganization",
+		"name": "URSSAF",
+		"logo": {
+			"@type": "ImageObject",
+			"url": "https://www.autoentrepreneur.urssaf.fr/portail/modules/webaeTemplates/img/logo-URSSAF.png"
+		}
+	},
+	"description": "La Cipav a décidé d’attribuer une aide exceptionnelle pour soutenir ses adhérents auto-entrepreneurs et professionnels libéraux, touchés par le ralentissement sans précédent de leur activité économique. En savoir plus : consultez la FAQ et le replay du Webinaire"
+},{
+	"@type": "NewsArticle",
+	
+		"position": "2",
+	
+	"url": "https://www.autoentrepreneur.urssaf.fr/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/modalites-de-gestion-de-lechea-1.html",
+	"mainEntityOfPage":"https://www.autoentrepreneur.urssaf.fr/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/modalites-de-gestion-de-lechea-1.html",
+	"author": "URSSAF",
+	"datePublished": "2019-01-29",
+	"dateModified": "2019-01-29",
+	"headline": "Coronavirus : les aides apportées aux autoentrepreneurs (Mise à jour le 08/07/2020)",
+	
+			"image": "https://www.autoentrepreneur.urssaf.fr/portail/files/live/sites/siteae/files/Actualites/Coronavirus%20Aides%20AE.jpg",
+		
+
+	"publisher": {
+		"@type": "GovernmentOrganization",
+		"name": "URSSAF",
+		"logo": {
+			"@type": "ImageObject",
+			"url": "https://www.autoentrepreneur.urssaf.fr/portail/modules/webaeTemplates/img/logo-URSSAF.png"
+		}
+	},
+	"description": "Le Fonds de solidarité : Par priorité, vous pouvez solliciter, auprès des services des impôts, l’aide prévue par le fonds de solidarité. Consultez les conditions pour bénéficier de cette aide       L&#039;action sociale :     Le Conseil de la protection sociale des travailleurs indépendants (CPSTI) a proposé une aide financière exceptionnelle Covid-19 aux indépendants dont l’activité a été impactée par la crise du coronavirus au titre des mois de mars, avril et mai 2020. La date limite de transmission de ces demandes ayant été fixée au 30/06/2020, les demandes transmises passées cette date ne seront pas instruites. Selon la situation économique de votre entreprise indépendante, et si les dispositions mises en place par les Urssaf ne sont pas suffisantes, il est néanmoins possible de faire une demande d’Aide aux Cotisants en Difficulté (ACED) ou d’Aide financière exceptionnelle (AFE) classique.    Consultez la page dédiée sur le site secu-independants.fr L&#039;aide CPSTI RCI (Régime Complémentaire des Indépendants) COVID-19  Les artisans/commerçants relevant du Régime Complémentaire des Indépendants (RCI) ,percevront une aide « CPSTI RCI COVID-19 ». Vous n’avez aucune démarche à réaliser.   Cette aide a été versée, fin avril, à tous les artisans/commerçants : relevant du Régime Complémentaire des Indépendants (RCI) en activité au 15 mars 2020 immatriculés avant le 1er janvier 2019  Elle sera cumulable avec le Fonds de Solidarité mis en place par le gouvernement. Cette aide n&#039;est pas imposable, ni soumise à cotisations et contributions sociales. Elle ne doit pas être déclarée dans le chiffre d&#039;affaires.   Montant de l&#039;aide : plafonné à hauteur des cotisations et contributions sociales RCI versées au titre de l’exercice 2018 plafonné à 1250 € nets d’impôts et de charges sociales     Les Arrêts de travail : Les modalités des arrêts dérogatoires restent inchangées à compter du 1er mai. Il est toutefois demandé de réitérer les demandes d’arrêt de travail au 1er mai, l’ensemble des arrêts dérogatoires en cours étant interrompus au 30 avril : ameli.fr   Le téléservice declare.ameli.fr de l&#039;Assurance Maladie permet à l’employeur de déclarer l’arrêt de travail pour ses salariés. Il s&#039;applique aux travailleurs indépendants, aux salariés du régime général, salariés agricoles, marins, clercs et employés de notaire et travailleurs non salariés agricoles et agents contractuels de la fonction publique. Les auto-entrepreneurs se déclarent eux-mêmes dans le téléservice. declare.ameli.fr   Ce dispositif concerne les parents d&#039;enfants de moins de 16 ans au jour du début de l&#039;arrêt ainsi que les parents d&#039;enfants en situation de handicap de moins de 18 ans pris en charge dans un établissement spécialisé sont également concernés.       Le téléservice declare.ameli.fr de l&#039;Assurance Maladie permet aux travailleurs indépendants et auto-entrepreneurs de déclarer un maintien à domicile pour les personnes fragiles. En savoir plus sur le service de déclaration de maintien à domicile Covid-19 sur Ameli.fr arrêt de travail simplifié pour garde d&#039;enfant(s) Cellule d&#039;écoute et de soutien psychologique aux chefs d&#039;entreprise : Les chefs d&#039;entreprise &#034;en détresse &#034; en cette période de crise économique et sanitaire peuvent trouver une écoute auprès d&#039;une cellule de soutien psychologique dédiée, mise en place sous la coordination du ministère de l&#039;Economie. Ce numéro vert (0 805 65 50 50) est ouvert tous les jours, de 8 heures à 20 heures. economie.gouv.fr/mise-en-place-cellule-ecoute-soutien-psychologique-chefs-entreprise# Consultez le Questions/Réponses dédié à la crise du corana virus.      "
+},{
+	"@type": "NewsArticle",
+	
+		"position": "3",
+	
+	"url": "https://www.autoentrepreneur.urssaf.fr/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/coronavirus--declarations-de-c-3.html",
+	"mainEntityOfPage":"https://www.autoentrepreneur.urssaf.fr/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/coronavirus--declarations-de-c-3.html",
+	"author": "URSSAF",
+	"datePublished": "2019-01-29",
+	"dateModified": "2019-01-29",
+	"headline": "Coronavirus : Déclarations de chiffres d’affaires du mois de juin ou du 2e trimestre 2020",
+	
+			"image": "https://www.autoentrepreneur.urssaf.fr/portail/files/live/sites/siteae/files/Fiches_pratiques/Actus%20corona%20juin%202020.JPG",
+		
+
+	"publisher": {
+		"@type": "GovernmentOrganization",
+		"name": "URSSAF",
+		"logo": {
+			"@type": "ImageObject",
+			"url": "https://www.autoentrepreneur.urssaf.fr/portail/modules/webaeTemplates/img/logo-URSSAF.png"
+		}
+	},
+	"description": "Conformément aux mesures annoncées par le Gouvernement dans le cadre de la crise du coronavirus, le réseau des Urssaf se mobilise. A l’instar des déclarations des mois de mars, avril, mai et du 1er trimestre 2020, vous devez déclarer votre chiffre d’affaires réel de la période concernée.   Pour le paiement de votre échéance du mois de juin ou du 2e trimestre 2020, vous avez trois possibilités :   1) Déclaration du montant réel de votre chiffres d’affaires pour la période concernée et paiement du total des cotisations, dans le cas où vous pouvez payer en totalité.   Le prélèvement de votre télépaiement ou de votre paiement par carte bancaire se fera alors dans les conditions habituelles (après l’échéance pour le télépaiement, en débit immédiat ou différé pour le paiement par carte bancaire).   2) Déclaration du montant réel de votre chiffres d’affaires pour la période concernée et paiement partiel des cotisations, dans le cas où vous ne pouvez payer qu’une partie seulement. Le prélèvement de votre télépaiement ou de votre paiement par carte bancaire d’une partie de la somme de vos cotisations se fera également dans les conditions habituelles (après l’échéance pour le télépaiement, en débit immédiat ou différé pour le paiement par carte bancaire).   3) Déclaration du montant réel de votre chiffres d’affaires pour la période concernée et absence de paiement, dans le cas où vous n’avez pas la capacité de payer.   Aucune majoration de retard ne sera appliquée, les modalités de régularisation des paiements partiels ou absents seront précisées ultérieurement. Votre Urssaf vous contactera une fois la crise sanitaire passée. Pour suivre la méthode de déclaration de votre chiffre d&#039;affaires réel avec paiement (total, partiel ou absent), consultez le mode opératoire étape par étape en cliquant ici. Soyez vigilants aux arnaques en cours :   Nous avons des signalements de tentatives d&#039;arnaque actuellement en cours. Si vous recevez le message sms suivant : &#034;Suite au COVID-19, nous instaurons un plafond des charges sociales à un montant fixe pour les 3 prochains mois. A régler avant le 06/07.&#034;   Ou si une personne vous réclame votre RIB par téléphone pour recevoir l&#039;aide de 1 500€ en indiquant être agent de l&#039;Urssaf Il s’agit d’une tentative d&#039;arnaque. Il ne faut surtout pas payer la somme réclamée. En cas de paiement déjà effectué, il convient de demander le remboursement. N&#039;hésitez pas à consulter notre page dédiée aux pièges et arnaques à éviter. Le ministère de l&#039;Intérieur et la Direction générale de la concurrence, de la consommation et de la répression des fraudes (DGCCRF) recommandent, suite à une tentative d&#039;arnaque par SMS, de signaler le message à la plateforme de signalement mise en place par les opérateurs de la fédération française des Télécom."
+}
+    ]
+}
+</script><hr />
+<section class="remonteeContenus">
+<h1 class="separateur">Outils</h1>
+
+<div class="row">
+	<div class="col-md-4 bloc_outils">
+		<a href="/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites/nouveau--simulez-le-montant-de-1.html">
+			<div class="d-flex align-self-center ">
+				<div class="d-inline-flex align-self-center outil_simuler"> </div>
+				<div class="d-inline-flex align-self-center">Simulez le montant de vos cotisations et contributions sociales</div>
+			</div>
+		</a>
+	</div>
+
+	<div class="col-md-4 bloc_outils">
+		<a href="/portail/accueil/sinformer-sur-le-statut/lessentiel-du-statut.html#durant-la-vie-de-votre-auto-entr">
+			<div class="d-flex align-self-center ">
+				<div class="d-inline-flex align-self-center outil_calendrier"> </div>
+				<div class="d-inline-flex align-self-center">Consulter le calendrier des &eacute;ch&eacute;ances</div>
+			</div>
+		</a>
+	</div>
+	
+	<div class="col-md-4 bloc_outils">
+		<a href="/portail/files/Tutos/declarer%26payer/mobile/index.html" target="_blank">
+			<div class="d-flex align-self-center ">
+				<div class="d-inline-flex align-self-center outil_guide"> </div>
+				<div class="d-inline-flex align-self-center">Besoin d'aide&nbsp;? Consultez le guide d&eacute;clarer et payer</div>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="row mt-4">
+	<div class="col-md-4 bloc_outils">
+		<a href="https://www.urssaf.fr/portail/home/utile-et-pratique/verification-attestation.html" target="_blank">
+			<div class="d-flex align-self-center ">
+				<div class="d-inline-flex align-self-center outil_attestation"> </div>
+				<div class="d-inline-flex align-self-center">V&eacute;rifiez l&rsquo;authenticit&eacute; des attestations Urssaf Autoentrepreneurs professions lib&eacute;rales (CIPAV)</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-md-6 bloc_outils">
+		<a href="https://www.secu-independants.fr/contact/attestations/#c45734 " target="_blank">
+			<div class="d-flex align-self-center ">
+				<div class="d-inline-flex align-self-center outil_attestation"> </div>
+				<div class="d-inline-flex align-self-center">V&eacute;rifiez l&rsquo;authenticit&eacute; des attestations Urssaf Autoentrepreneurs Artisans/Commer&ccedil;ants et Professions lib&eacute;rales non r&egrave;glement&eacute;es</div>
+			</div>
+		</a>
+	</div>
+</div>
+</section>
+<style type="text/css">.bloc_outils div div:first-child {
+    min-height: 2.5em;
+    min-width: 2.5em;
+    margin-bottom: .5em;
+    margin-right: .5em;
+	margin-left: .5em;
+    margin-top: .5em;
+}
+.bloc_outils a {
+    text-decoration:none;
+	width: 100%;
+	padding-right: 0.5em;
+	display:inline-block;
+}
+.bloc_outils a:hover {
+    color:#FFFFFF;
+	background-color:#0064A7;
+}
+.bloc_outils .outil_simuler{
+	background: url(/portail/files/live/sites/siteae/files/outils/calculatrice.svg) no-repeat center;
+}
+.bloc_outils a:hover div .outil_simuler{
+	background: url(/portail/files/live/sites/siteae/files/outils/calculatrice-survol.svg) no-repeat center;
+}
+.bloc_outils .outil_calendrier{
+	background: url(/portail/files/live/sites/siteae/files/outils/calendrier.svg) no-repeat center;
+}
+.bloc_outils a:hover div .outil_calendrier{
+	background: url(/portail/files/live/sites/siteae/files/outils/calendrier-survol.svg) no-repeat center;
+}
+.bloc_outils .outil_guide{
+	background: url(/portail/files/live/sites/siteae/files/outils/guide.svg) no-repeat center;
+}
+.bloc_outils a:hover div .outil_guide{
+	background: url(/portail/files/live/sites/siteae/files/outils/guide-survol.svg) no-repeat center;
+}
+.bloc_outils .outil_attestation{
+	background: url(/portail/files/live/sites/siteae/files/outils/attestation.png) no-repeat center;
+	background-size: contain;
+}
+.bloc_outils a:hover div .outil_attestation{
+	background: url(/portail/files/live/sites/siteae/files/outils/attestation-survol.png) no-repeat center;
+	background-size: contain;
+}
+.svg-container {
+display: inline-block;
+position: relative;
+width: 100%;
+padding-bottom: 100%;
+vertical-align: middle;
+overflow: hidden;
+}
+</style><hr/>
+
+<section class="remonteeContenus">
+
+	
+		<h1 class="separateur">Comment faire pour...</h1>
+	
+
+	<div class="row">
+		<div class="col-sm-6 col-lg-4">
+	<a href="/portail/accueil/une-question/toutes-les-fiches-pratiques/demander-lacre.html" class="bloc_fiche">
+		<div class="d-flex align-self-center bloc_comment_faire">
+			
+			<div class="d-inline-flex align-self-center souscrire"></div>
+			<div class="d-inline-flex align-self-center">Demander l&rsquo;Acre</div>
+		</div>
+	</a>
+</div><div class="col-sm-6 col-lg-4">
+	<a href="/portail/accueil/une-question/toutes-les-fiches-pratiques/creer-mon-auto-entreprise.html" class="bloc_fiche">
+		<div class="d-flex align-self-center bloc_comment_faire">
+			
+			<div class="d-inline-flex align-self-center modifier_cesser"></div>
+			<div class="d-inline-flex align-self-center">Cr&eacute;er mon auto-entreprise</div>
+		</div>
+	</a>
+</div><div class="col-sm-6 col-lg-4">
+	<a href="/portail/accueil/une-question/toutes-les-fiches-pratiques/modifier-ou-cesser-mon-activite.html" class="bloc_fiche">
+		<div class="d-flex align-self-center bloc_comment_faire">
+			
+			<div class="d-inline-flex align-self-center modifier_cesser"></div>
+			<div class="d-inline-flex align-self-center">Modifier ou cesser mon activit&eacute;</div>
+		</div>
+	</a>
+</div><div class="col-sm-6 col-lg-4">
+	<a href="/portail/accueil/une-question/toutes-les-fiches-pratiques/telecharger-mon-releve-de-situat.html" class="bloc_fiche">
+		<div class="d-flex align-self-center bloc_comment_faire">
+			
+			<div class="d-inline-flex align-self-center telecharger_releve_situation"></div>
+			<div class="d-inline-flex align-self-center">T&eacute;l&eacute;charger mon relev&eacute; de situation</div>
+		</div>
+	</a>
+</div><div class="col-sm-6 col-lg-4">
+	<a href="/portail/accueil/une-question/toutes-les-fiches-pratiques/utiliser-lapplication-mobile-aut.html" class="bloc_fiche">
+		<div class="d-flex align-self-center bloc_comment_faire">
+			
+			<div class="d-inline-flex align-self-center amme"></div>
+			<div class="d-inline-flex align-self-center">Utiliser l&rsquo;application mobile AutoEntrepreneur Urssaf</div>
+		</div>
+	</a>
+</div><div class="col-sm-6 col-lg-4">
+	<a href="/portail/accueil/une-question/toutes-les-fiches-pratiques/declarer-et-payer-mes-cotisation.html" class="bloc_fiche">
+		<div class="d-flex align-self-center bloc_comment_faire">
+			
+			<div class="d-inline-flex align-self-center declarer_payer"></div>
+			<div class="d-inline-flex align-self-center">D&eacute;clarer et payer mes cotisations</div>
+		</div>
+	</a>
+</div>
+	</div>
+
+	
+		<div class="text-right">
+			<a href="/portail/accueil/une-question/toutes-les-fiches-pratiques.html" class="btn voir_tout">Voir toutes les fiches pratiques</a>
+		</div>
+	
+
+</section><div class="clear"></div><div class="clear"></div>
+</main>
+	</div>
+	<button class="btn retour_haut_page round-circle" onclick='$("html, body").animate({scrollTop : 0}, 400);' title="Retourner en haut de la page">Retourner en haut de la page</button>
+	<footer>
+		<div class="bande hidden-xs"></div>
+		<div class="container">
+	<div class="row">
+		
+			<div class="col-sm-4 col-lg-2">
+				<h1>R&eacute;seau des Urssaf</h1>
+<ul>
+	
+		<li><a href="http://www.acoss.fr/home/lacoss-et-les-urssaf/qui-sommes-nous.html" target="_blank" title="L’Acoss, caisse nationale - Nouvelle fenêtre">L&rsquo;Acoss, caisse nationale</a></li>
+	
+		<li><a href="http://www.acoss.fr/home/nos-missions.html" target="_blank" title="Nos missions - Nouvelle fenêtre">Nos missions</a></li>
+	
+		<li><a href="http://www.acoss.fr/home/candidats.html" target="_blank" title="Nos offres d’emploi - Nouvelle fenêtre">Nos offres d&rsquo;emploi</a></li>
+	
+</ul>
+			</div>
+		
+			<div class="col-sm-4 col-lg-2">
+				<h1>Nos sites web</h1>
+<ul>
+	
+		<li><a href="http://www.acoss.fr/" target="_blank" title="Acoss - Nouvelle fenêtre">Acoss</a></li>
+	
+		<li><a href="https://www.urssaf.fr/" target="_blank" title="Urssaf - Nouvelle fenêtre">Urssaf</a></li>
+	
+		<li><a href="http://www.cea.urssaf.fr/" target="_blank" title="Cea - Nouvelle fenêtre">Cea</a></li>
+	
+		<li><a href="https://www.cesu.urssaf.fr/" target="_blank" title="Cesu - Nouvelle fenêtre">Cesu</a></li>
+	
+		<li><a href="http://www.pajemploi.urssaf.fr/" target="_blank" title="Pajemploi - Nouvelle fenêtre">Pajemploi</a></li>
+	
+		<li><a href="http://www.tfe.urssaf.fr/" target="_blank" title="Tfe - Nouvelle fenêtre">Tfe</a></li>
+	
+		<li><a href="http://www.letese.urssaf.fr/" target="_blank" title="Tese - Nouvelle fenêtre">Tese</a></li>
+	
+		<li><a href="https://www.tpee.urssaf.fr/" target="_blank" title="Tpee - Nouvelle fenêtre">Tpee</a></li>
+	
+		<li><a href="http://www.net-entreprises.fr/" target="_blank" title="Net-entreprises - Nouvelle fenêtre">Net-entreprises</a></li>
+	
+		<li><a href="http://www.net-particulier.fr/" target="_blank" title="Net-particulier - Nouvelle fenêtre">Net-particulier</a></li>
+	
+		<li><a href="https://open.urssaf.fr/pages/home/" target="_blank" title="Open.urssaf">Open.urssaf</a></li>
+	
+</ul>
+			</div>
+		
+			<div class="col-sm-4 col-lg-2">
+				<h1>Acc&egrave;s direct</h1>
+<ul>
+	
+		<li><a href="/portail/accueil/sinformer-sur-le-statut/toutes-les-actualites.html" target="_self" >Actualit&eacute;s</a></li>
+	
+		<li><a href="/portail/accueil/une-question/toutes-les-fiches-pratiques.html" target="_self" >Fiches pratiques</a></li>
+	
+		<li><a href="/portail/accueil/sinformer-sur-le-statut/lessentiel-du-statut.html" target="_self" >L&rsquo;essentiel du statut</a></li>
+	
+		<li><a href="/portail/accueil/une-question/questions-frequentes.html" target="_self" >Questions fr&eacute;quentes</a></li>
+	
+</ul>
+			</div>
+		
+				<div class="clearfix visible-sm"></div>
+			
+			<div class="col-sm-4 col-lg-2">
+				<h1>Outils en ligne</h1>
+<ul>
+	
+		<li><a href="/portail/accueil/creer-mon-auto-entreprise.html" target="_self" >Devenir auto-entrepreneur</a></li>
+	
+		<li><a href="/portail/accueil/lexique.html" target="_self" >Lexique</a></li>
+	
+</ul>
+			</div>
+		
+			<div class="col-sm-4 col-lg-2">
+				<h1>Contact</h1>
+<ul>
+	
+		<li><a href="/portail/accueil/une-question/nous-contacter/courriel.html" target="_self" >Nous contacter</a></li>
+	
+</ul>
+			</div>
+		
+			<div class="col-sm-4 col-lg-2">
+				<h1>Informations sur le site</h1>
+<ul>
+	
+		<li><a href="/portail/accueil/accessibilite.html" target="_self" >Accessibilit&eacute;</a></li>
+	
+		<li><a href="/portail/accueil/mentions-legales.html" target="_self" >Mentions l&eacute;gales</a></li>
+	
+		<li><a href="/portail/accueil/plan-du-site.html" target="_self" >Plan du site</a></li>
+	
+		<li><a href="http://www.acoss.fr/home/politique-de-confidentialite.html" target="_blank" title="Politique de confidentialité - Nouvelle fenêtre">Politique de confidentialit&eacute;</a></li>
+	
+</ul>
+			</div>
+		
+	</div>
+</div>
+	</footer>
+<!-- Code pour activer les tooltips et gérer les accordéons -->
+<script type="text/javascript">
+  // Code pour afficher/masquer la barre de navigation rapide en haut de page
+  $(".acces_rapides a").on("focus", function(){$('.acces_rapides').addClass('visible');});
+  $(".acces_rapides a").on("click blur", function(){$('.acces_rapides').removeClass('visible');});
+
+  // on met à jour l'attribut aria-expanded du bouton fermer suivant le changement d'état de l'accordéon correspondant
+  $(function() {
+    $('.bloc_questions .collapse').on('show.bs.collapse', function () {
+        $(this).find('.bouton_fermer').attr('aria-expanded', 'true');
+    });
+    $('.bloc_questions .collapse').on('hide.bs.collapse', function () {
+        $(this).find('.bouton_fermer').attr('aria-expanded', 'false');
+    });
+  });
+
+  // Réduit l'accordéon parent du bouton passé en paramètre et scrolle pour afficher la suite en haut de page.
+  function fermer_reponse(button) {
+    var jDiv = $(button).closest(".collapse"); // On récupère l'élement accordéon parent du bouton fermer
+    var targetPosition = jDiv.offset().top - 50; // On calcule la position de l'élément à afficher en haut de zone d'affichage
+    var visibleAreaTop = $(window).scrollTop(); // On récupère la position du haut de la zone affichée à l'écran
+    var visibleAreaBottom = visibleAreaTop + $(window).height(); // On récupère la position du bas de la zone affichée à l'écran
+    if ((targetPosition >= visibleAreaTop) && (targetPosition <= visibleAreaBottom)) {
+      // Si le haut de l'accordéon est déjà dans la zone visible, on le replie et on fait défiler l'écran en même temps
+      $("html, body").animate({scrollTop : targetPosition}, 400); // on scrolle jusqu'en haut de l'accordéon
+      jDiv.collapse('hide'); // On ferme l'accordéon
+    } else {
+      // Sinon, pour éviter de perdre l'utilisaeur, on procède en deux temps
+      $("html, body").animate({scrollTop : targetPosition}, 400, function() { // Tout d'abord, on scrolle jusqu'en haut de l'accordéon
+        jDiv.collapse('hide'); // Puis on termine par fermer l'accordéon
+      });
+    }
+  }
+
+  // Code pour afficher/masquer le bouton de retour en haut de page
+  $(function() {
+
+    $(window).scroll(function(){
+      if ($(this).scrollTop() > 100) {
+        $('.retour_haut_page').fadeIn(400);
+      } else {
+        $('.retour_haut_page').fadeOut(400);
+      }
+    });
+    $(window).on('hashchange',function(){
+
+    	var hash = location.hash;
+
+    	if($('button[data-target="'+hash+'-contenu"]').length >0){
+//     		console.log("il y a des choses à déplier ("+hash+")");
+
+    		// S'il y a des parents dépliables, il faut les déplier
+    		$('button[data-target="'+hash+'-contenu"]').parents(".collapse").each( function(){
+//     			console.log("on deplie "+$(this).attr('id'));
+	    		$('#'+$(this).attr('id')).collapse('show');
+    		});
+    		$(hash+'-contenu').collapse('show');
+    		$('html,body').animate({
+            	scrollTop: $(hash).offset().top
+      		}, 400);
+    	}
+	});
+    if(window.location.hash) {
+    	// S'il y a une ancre déjà présente au chargement de la page
+    	$(window).trigger('hashchange');
+    }
+
+    $('a[href^="#"]').click(function(){
+    	if(location.hash==$(this).attr('href')){
+    		$(window).trigger('hashchange');
+    	}
+    });
+
+  });
+</script>
+</body>
+</html>

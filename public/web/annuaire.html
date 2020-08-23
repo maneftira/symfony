@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Annuaire des experts-comptables </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Annuaire officiel de l'ordre des experts-comptables">
+        <base href="/annuaire/">
+                        <link rel="stylesheet" href="/annuaire/css/bootstrap.css"/annuaire/>
+        
+    <link rel="stylesheet" href="/annuaire/css/accueil.css"/annuaire/>
+        			<!-- Matomo -->
+			<script type="text/javascript">
+			  var _paq = _paq || [];
+              if (window.location.search.length <= 0) {
+    			  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    			  _paq.push(['trackPageView']);
+    			  _paq.push(['enableLinkTracking']);
+              }
+			  (function() {
+			    var u= "https://matomo.experts-comptables.org/";
+			    _paq.push(['setTrackerUrl', u+'piwik.php']);
+			    _paq.push(['setSiteId', "7"]);
+			    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+			 })();
+			</script>
+			<!-- End Matomo Code -->
+
+            </head>
+    <body>
+        <div class="container-fluid">
+                        <div class="row justify-content-center">
+    <a class="mx-auto logoannuaire" href="/annuaire/">
+        <img class="d-none d-md-block" src="/annuaire/images/logo-annuaire.png" alt="annuaire des experts-comptables">
+        <img class="img-fluid d-md-none" src="/annuaire/images/logo-annuaire.png" alt="annuaire des experts-comptables">
+    </a>
+</div>
+<div id="accordion">
+  <div class="card card-md-wo-border">
+    <div class="card-header d-md-none" id="headingOne">
+      <h5 class="mb-0 text-center">
+        <button class="btn btn-link encart" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            En savoir plus sur l'exercice illégal
+        </button>
+      </h5>
+    </div>
+    <div id="collapseOne" class="collapse d-md-flex" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        La consultation du présent annuaire permet de vérifier que le professionnel à qui vous confiez votre comptabilité est un expert-comptable, et qu'il est à ce titre inscrit au tableau de l'Ordre. 
+        Toute mission en lien avec la comptabilité et visée par <a class="siteExterne" href="https://www.experts-comptables.org/decouvrir-la-profession/qu-est-ce-qu-un-expert-comptable#prerogative" target="_blank">la prérogative exclusive d'exercice de la profession</a> ne peut être réalisée que par un expert-comptable. A défaut de le trouver dans l'annuaire, remplissez <a class="siteExterne" href="https://www.experts-comptables.org/signalement-exercice-illegal" target="_blank">le formulaire de signalement </a> ou prenez contact avec <a class="siteExterne" href="https://www.experts-comptables.org/decouvrir-la-profession/notre-presence-en-region" target="_blank">le Conseil de l'Ordre de votre région</a>.
+      </div>
+    </div>
+  </div>
+</div>                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div id="alertMessage" class="alertMessage text-center"></div>
+        </div>
+                <div class="row containRech">
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+    <form id="rechercheForm" action="/annuaire/recherche" method="GET">
+        <input type="hidden" id="page" name="page" value="1">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 divcritere">
+               <label class="">Critères de recherche</label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="inputNomOuRaisonSociale" placeholder="Nom, raison sociale" name="nomRaisonSociale" value="">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="villeOuCodePostal" placeholder="Ville, code postal" name="villeCodePostal" value="">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="departement" name="departement">
+    <option value="">Sélectionner un département</option>
+                        <option value="01">01 - Ain</option>
+                                <option value="02">02 - Aisne</option>
+                                <option value="03">03 - Allier</option>
+                                <option value="04">04 - Alpes de Haute Provence</option>
+                                <option value="05">05 - Hautes Alpes</option>
+                                <option value="06">06 - Alpes Maritimes</option>
+                                <option value="07">07 - Ardèche</option>
+                                <option value="08">08 - Ardennes</option>
+                                <option value="09">09 - Ariège</option>
+                                <option value="10">10 - Aube</option>
+                                <option value="11">11 - Aude</option>
+                                <option value="12">12 - Aveyron</option>
+                                <option value="13">13 - Bouches du Rhône</option>
+                                <option value="14">14 - Calvados</option>
+                                <option value="15">15 - Cantal</option>
+                                <option value="16">16 - Charente</option>
+                                <option value="17">17 - Charente Maritime</option>
+                                <option value="18">18 - Cher</option>
+                                <option value="19">19 - Corrèze</option>
+                                <option value="2A">2A - Corse du Sud</option>
+                                <option value="2B">2B - Haute Corse</option>
+                                <option value="21">21 - Côte d&#039;Or</option>
+                                <option value="22">22 - Côtes d&#039;Armor</option>
+                                <option value="23">23 - Creuse</option>
+                                <option value="24">24 - Dordogne</option>
+                                <option value="25">25 - Doubs</option>
+                                <option value="26">26 - Drôme</option>
+                                <option value="27">27 - Eure</option>
+                                <option value="28">28 - Eure et Loir</option>
+                                <option value="29">29 - Finistère</option>
+                                <option value="30">30 - Gard</option>
+                                <option value="31">31 - Haute Garonne</option>
+                                <option value="32">32 - Gers</option>
+                                <option value="33">33 - Gironde</option>
+                                <option value="34">34 - Hérault</option>
+                                <option value="35">35 - Ille et Vilaine</option>
+                                <option value="36">36 - Indre</option>
+                                <option value="37">37 - Indre et Loire</option>
+                                <option value="38">38 - Isère</option>
+                                <option value="39">39 - Jura</option>
+                                <option value="40">40 - Landes</option>
+                                <option value="41">41 - Loir et Cher</option>
+                                <option value="42">42 - Loire</option>
+                                <option value="43">43 - Haute Loire</option>
+                                <option value="44">44 - Loire Atlantique</option>
+                                <option value="45">45 - Loiret</option>
+                                <option value="46">46 - Lot</option>
+                                <option value="47">47 - Lot et Garonne</option>
+                                <option value="48">48 - Lozère</option>
+                                <option value="49">49 - Maine et Loire</option>
+                                <option value="50">50 - Manche</option>
+                                <option value="51">51 - Marne</option>
+                                <option value="52">52 - Haute Marne</option>
+                                <option value="53">53 - Mayenne</option>
+                                <option value="54">54 - Meurthe et Moselle</option>
+                                <option value="55">55 - Meuse</option>
+                                <option value="56">56 - Morbihan</option>
+                                <option value="57">57 - Moselle</option>
+                                <option value="58">58 - Nièvre</option>
+                                <option value="59">59 - Nord</option>
+                                <option value="60">60 - Oise</option>
+                                <option value="61">61 - Orne</option>
+                                <option value="62">62 - Pas de Calais</option>
+                                <option value="63">63 - Puy de Dôme</option>
+                                <option value="64">64 - Pyrénées Atlantiques</option>
+                                <option value="65">65 - Hautes Pyrénées</option>
+                                <option value="66">66 - Pyrénées Orientales</option>
+                                <option value="67">67 - Bas Rhin</option>
+                                <option value="68">68 - Haut Rhin</option>
+                                <option value="69">69 - Rhône</option>
+                                <option value="70">70 - Haute Saône</option>
+                                <option value="71">71 - Saône et Loire</option>
+                                <option value="72">72 - Sarthe</option>
+                                <option value="73">73 - Savoie</option>
+                                <option value="74">74 - Haute Savoie</option>
+                                <option value="75">75 - Paris</option>
+                                <option value="76">76 - Seine Maritime</option>
+                                <option value="77">77 - Seine et Marne</option>
+                                <option value="78">78 - Yvelines</option>
+                                <option value="79">79 - Deux Sèvres</option>
+                                <option value="80">80 - Somme</option>
+                                <option value="81">81 - Tarn</option>
+                                <option value="82">82 - Tarn et Garonne</option>
+                                <option value="83">83 - Var</option>
+                                <option value="84">84 - Vaucluse</option>
+                                <option value="85">85 - Vendée</option>
+                                <option value="86">86 - Vienne</option>
+                                <option value="87">87 - Haute Vienne</option>
+                                <option value="88">88 - Vosges</option>
+                                <option value="89">89 - Yonne</option>
+                                <option value="90">90 - Territoire de Belfort</option>
+                                <option value="91">91 - Essonne</option>
+                                <option value="92">92 - Hauts de Seine</option>
+                                <option value="93">93 - Seine St Denis</option>
+                                <option value="94">94 - Val de Marne</option>
+                                <option value="95">95 - Val d&#039;Oise</option>
+                                <option value="971">971 - Guadeloupe</option>
+                                <option value="972">972 - Martinique</option>
+                                <option value="973">973 - Guyane</option>
+                                <option value="974">974 - La Réunion</option>
+                                <option value="976">976 - Mayotte</option>
+            </select>                    </div>
+                 <button id="rechercheBtn" type="submit" class="btn btn-primary float-right">Rechercher</button>
+            </div>
+        </div>
+                    <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/1890934/annuaire_230_290', [580, 120], 'ads-desktop').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+
+<div id="google-ads-containerDesktop1" class="row">
+    <div id="ads-desktop" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="google-ads text-center"> 
+            <script>
+                googletag.cmd.push(function() { googletag.display('ads-desktop'); });
+            </script>
+       </div>
+    </div>
+</div>
+
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/1890934/csoec_annuaire_728_90', [300, 120], 'ads-mobile').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+
+<div id="google-ads-containerDesktop" class="row">
+    <div id="ads-mobile" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="google-ads text-center"> 
+            <script>
+                googletag.cmd.push(function() { googletag.display('ads-mobile'); });
+            </script>
+       </div>
+    </div>
+</div>                <div class="row d-md-none mt-3">
+            <a class="btn btn-secondary" data-toggle="collapse" href="#critereSubForm">Plus de critères</a>
+        </div>
+        <div class="row collapse d-md-flex" id="critereSubForm">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 divcriterePers">
+                <label class="">Personnes physiques</label>
+                <div class="form-check">
+                   <input type="checkbox" class="form-check-input" id="ecInde" name="qualite[]" value="010,020"  checked >
+                   <label class="form-check-label labelcheckbox" for="ecInde">Expert-comptable</label>
+                </div>
+                <div class="form-check">
+                   <input type="checkbox" class="form-check-input" id="ec83" name="qualite[]" value="83T,83Q"  checked >
+                   <label class="form-check-label labelcheckbox" for="ec83">Salarié AGC 83T/83Q </label>
+                </div>
+                <label class="">Personnes morales</label>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="socEC" name="qualite[]" value="030"  checked >
+                    <label class="form-check-label labelcheckbox" for="socEC">Société d'expertise comptable</label>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="socPlu" name="qualite[]" value="031"  checked >
+                    <label class="form-check-label labelcheckbox" for="socPlu">Société pluriprofessionnelle d'exercice</label>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="agc" name="qualite[]" value="83A"  checked >
+                    <label class="form-check-label labelcheckbox" for="agc">Association de Gestion et de Comptabilité</label>
+                </div>
+
+                <label class="">Autres personnes</label>
+                <div class="form-check">
+                   <input type="checkbox" class="form-check-input" id="ecHonoraire" name="qualite[]" value="090" >
+                   <label class="form-check-label labelcheckbox" for="ecHonoraire">Expert-comptable honoraire</label>
+                </div>
+                <div class="form-check">
+                   <input type="checkbox" class="form-check-input" id="ecStagiaire" name="qualite[]" value="084" >
+                   <label class="form-check-label labelcheckbox" for="ecStagiaire">Expert-comptable stagiaire</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="spec" name="qualite[]" value="060" >
+                    <label class="form-check-label labelcheckbox" for="spec">Société de participations d'expertise comptable</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="spfpl" name="qualite[]" value="061" >
+                    <label class="form-check-label labelcheckbox" for="spfpl">Société de participations financières de professions libérales</label>
+                </div>
+
+                <button  id="majBtn" type="button" class="btn btn-primary float-right">Mettre à jour</button>
+
+            </div>
+        </div> 
+    </form>
+</div>
+
+<div class="d-md-none">&nbsp;</div>
+        
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                          <div class="tab-content" id="resultat-tab-content">
+                                  <div id="chargementEncours" class="text-center" style="display:none;">
+                  <p class="text-center"><img src="/annuaire/images/ajax-loader.gif" alt="Chargement en cours..."></p>
+              </div>
+          </div>
+            </div>
+</div>
+                <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/1890934/annuaire_2018_mobile_footer_v2', [300, 120], 'div-annuaire_2018_mobile_footer_v2').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+<div id="google-ads-containerMobile" class="row">
+    <div id="ads-footer-moblie" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div id='div-annuaire_2018_mobile_footer_v2' class="google-ads text-center"> 
+            <script>
+                googletag.cmd.push(function() { googletag.display('div-annuaire_2018_mobile_footer_v2'); });
+            </script>
+       </div>
+    </div>
+</div>
+                <div class="row footer">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 footercol">
+        <footer>Mentions légales | ©Conseil supérieur de l’ordre des experts-comptables - 2018 
+        </footer>
+    </div>
+</div>                <div class="modal fade" id="chargementEncours" tabindex="-1" role="dialog" aria-labelledby="chargementEncours" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content ajax-loader">
+      <div class="modal-body">
+          <p class="text-center"><img src="/annuaire/images/ajax-loader.gif" alt="Chargement en cours..."></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal contact -->
+<div id="contactModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalMailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalMailLabel">Formulaire de contact</h5>
+            <button id="fermetureContactBtn" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- modal contact -->
+          <form id="contactForm" role="form" action="/annuaire/envoi-email" method="POST">
+              <div class="modal-body">
+                      <div class="form-group">
+                          <label for="nom"> Nom <span class="asterix"> * </span></label>
+                          <input type="text" class="form-control mb-2" id="nom" name="nom"   required maxlength="100">
+                          <div id="error_nom" class="invalid-feedback d-none">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="email"> Votre adresse de courriel <span class="asterix"> * </span></label>
+                          <input type="email" class="form-control mb-2" id="email" name="email" required maxlength="50">
+                          <div id="error_email" class="invalid-feedback d-none">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="objet"> Objet <span class="asterix"> * </span></label>
+                          <input type="text" class="form-control mb-2" id="objet" name="objet" required maxlength="100">
+                          <div id="error_objet" class="invalid-feedback d-none">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="name"> Message <span class="asterix"> * </span></label>
+                          <textarea class="form-control mb-2" type="textarea" name="message" id="message" placeholder="Votre message ici" maxlength="8000" rows="7"></textarea>
+                          <div id="error_message" class="invalid-feedback d-none">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                         <input type="hidden" class="form-control" id="emailID" name="emailID" value="">
+                      </div>
+              </div>
+              <div class="modal-footer">
+                <button id="envoiEmailBtn" type="submit" class="btn btn-primary">Envoyer</button>
+              </div>
+          </form>
+      </div>
+    </div>
+</div>                                    <script src="/annuaire/js/jquery.js"></script>
+                <script src="/annuaire/js/bootstrap.js"></script>
+            
+    <script src="/annuaire/js/commun.js"></script>
+    <script src="/annuaire/js/recherche.js"></script>
+    <script src="/annuaire/js/contact.js"></script>
+        </div>
+    </body>
+</html>

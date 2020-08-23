@@ -5,17 +5,17 @@
 
 {% block body %}
 	<form method="post">
-		<center class="container fluid col-4 mt-3">
-			<div  id="colorlib-main">
+		<center class="container col-5 mt-3 " style="position: absolute">
+			<div  >
 				{% if error %}
 					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 				{% endif %}
 
 				{% if app.user %}
 					<div class="mb-3">
-						You are logged in as
+						Vous êtes connecté en tant que
 						{{ app.user.username }},
-						<a href="{{ path('app_logout') }}">Logout</a>
+						<a href="{{ path('app_logout') }}">Se déconnecter</a>
 					</div>
 				{% endif %}
 

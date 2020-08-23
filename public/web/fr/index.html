@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>CIC | Construisons dans un monde qui bouge</title>
+	<meta name="description" content="Bienvenue sur le site du CIC. Êtes-vous un particulier, un professionnel ou une entreprise ? Voulez-vous en savoir plus sur le groupe CIC ?" />
+	<meta name="keywords" content="" />
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" rel="stylesheet" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/css/ei_base.css" />
+	<script type="text/javascript" src="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/javascript/appli/jquery_ei.js"></script>
+
+
+    <style>
+    
+	/*corrigé dans la 11.81.3
+    table.fiche td.datarupture, table.fiche td.rupture, table.fiche th.datarupture, table.fiche th.rupture, table.liste td.datarupture, table.liste td.rupture, table.liste th.datarupture, table.liste th.rupture, table.saisie td.datarupture, table.saisie td.rupture, table.saisie th.datarupture, table.saisie th.rupture, table.tab2dim td.datarupture, table.tab2dim td.rupture, table.tab2dim th.datarupture, table.tab2dim th.rupture {
+    	background-color: #8d8d8d;
+    }*/
+	/* Patch temporaire sur Univers Vélo Electrique */
+    .ei_product-velotemp {
+        background-color: #FFF;
+        background-size: contain;
+    }
+	/*bogue ie11 Univers Vélo pas encore intégré dans la charte*/
+	.ei_productcard__amount .ei_blcdata_val .ei_blcdata_valtext {
+		display:block;
+	}
+	/*bourse accueil patch 07/07/2020*/
+	.ei_ergov5 #divTuiles .ei_tile .ei_tile_body td {
+		color: #000;
+	}
+	.ei_ergov5 #divTuiles .ei_tile .ei_tile_body td.rupture {
+		color: #fff;
+	}
+	.ei_ergov5 #divTuiles .ei_tile .ei_tile_body .rupture td {
+		color: #fff;
+	}
+	.ei_ergov5 #divTuiles .ei_tile .ei_tile_body td.ei_neg  {
+		color: #f31;
+	}
+	.ei_ergov5 #divTuiles .ei_tile .ei_tile_body td.ei_pos  {
+		color: #099;
+	}
+	/*41998134 bogue ie11 sur flex*/
+	@media all and (-ms-high-contrast:none){
+		*::-ms-backdrop, ._devb_act .a_blocappli .ei_offercard.ei_offercard-newlook {	display:block;}
+		*::-ms-backdrop, ._devb_act .a_blocappli .ei_richrbgroup_slice.ei_richrbgroup_grid2.ei_richrbgroup .ei_richrb {max-width:calc((100%/2) - 3px)}
+	}
+
+	
+    </style>
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/css/ei_base.css">
+<script src="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/javascript/appli/env.js" type="text/javascript"></script>
+
+	<!-- favicones-->
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/images/std/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/images/std/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/images/std/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/images/std/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/images/std/favicons/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/images/std/favicons/mstile-144x144.png">
+<meta name="msvalidate.01" content="C2A59197330B1F20F89212C0F687EFE7" />
+
+<meta name="apple-itunes-app" content="app-id=376788484">
+<style>#errctxjs { display: none; }</style>
+
+
+	<link type="text/css" rel="stylesheet" href="/partage/fr/CC/CIC-2015/styles/styles.css">
+	<link type="text/css" rel="stylesheet" href="/partage/fr/CC/CIC-2015/styles/prehome.css">
+	<!--[if lte IE 9]> 
+	<link type="text/css" rel="stylesheet" href="/partage/partage_fr/I14/CIC/styles/2016/prehome-ie9.css">
+	<![endif]-->
+	<script type="text/javascript" src="/partage/partage_fr/I14/scripts/cic.js" ></script>
+	<script type="text/javascript" src="/partage/partage_fr/I14/scripts/prehome.js" ></script>
+
+
+    <link href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/css/appli/ei_custom_conseiller.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        .ei_buttonbar .ei_mainbuttons {float: none;}
+    </style>
+	
+
+<script type="text/javascript" src="https://cdnii.e-i.com/WEBO/sd/wat/1.0.3//javascripts/tracking_event.js" charset="UTF-8"></script>
+<!-- Datasinks V1 -->
+<script type="text/javascript">
+    function getCookieDclic(nomCookie) {
+  deb=document.cookie.indexOf(nomCookie+"=");
+  if (deb>=0) {
+    deb+=nomCookie.length+1;
+    fin=document.cookie.indexOf(";",deb);
+    if (fin<0) {
+      fin=document.cookie.length;
+    }
+    return unescape(document.cookie.substring(deb,fin));
+  }
+  else { 
+     return "";
+  }
+}
+
+if (typeof(navigator) != "undefined" && navigator.doNotTrack != "1" && navigator.msDoNotTrack != "1" && typeof(window) != "undefined" && window.doNotTrack != "1") {
+if (typeof(getCookieDclic) != "undefined" && getCookieDclic('cookies_accepted') != null && getCookieDclic('cookies_accepted') != "") {
+  if (getCookieDclic('cookies_accepted') == "1" || getCookieDclic('cookies_accepted').match("cookie_marketing=true")) {
+    
+    var dclicClient = {
+      info: {
+        v: "1.0.0"
+      },
+      watMap: {
+        "espace": "s1",
+        "user_federation": "s2",
+        "user_agence": "s3",
+        "user_formule_bad": "s4",
+        "user_type_client": "s5",
+        "user_segment": "s8",
+        "user_segment_commercial":"s9",
+        "user_frequence_bad": "s10",
+        "env_work": "s11",
+        "env_langue": "s12",
+        "dir_reg": "s13",
+        "cat_juridique": "s14",
+        "env_espace": "s15",
+        "typepage": "s16",
+        "user_space": "s17",
+        "statutuser": "s18",
+        "substitution_mode": "s19",
+        "user_type_personne": "s20",
+        "user_niveau": "s21",
+        "env_channel": "s22",
+        "relation_group": "s23",
+        "env_marque": "s24",
+        "env_country": "s25",
+        "page_cat1": "s26",
+        "page_cat2": "s27",
+        "page_cat3": "s28",
+        "page_cat4": "s29",
+        "page_cat5": "s30"
+      },
+
+      init: function() {
+        document.addEventListener("DOMContentLoaded", function() {
+          dclicClient.pushEvent("Page Viewed");
+        });
+      },
+      setEid: function(value) {
+        dclicClient.info.eid = value;
+      },
+      setAid: function(value) {
+        dclicClient.info.aid = value;
+      },
+      pushEvent: function(name, payload) {
+        var evt = {};
+        payload = payload || {};
+
+        $.extend(evt, payload);
+
+        if(typeof tc_vars !== 'undefined') {
+            Object.assign(watData, tc_vars);
+        }
+
+        Object.keys(dclicClient.watMap).forEach(function (key, index) {
+               if(typeof watData !== 'undefined') {
+                   if(watData.hasOwnProperty(key)) {
+                        evt[dclicClient.watMap[key]] = watData[key];
+                   }
+               }
+         });
+
+        $.extend(evt, dclicClient.info);
+        $.extend(evt, {
+          e: name,
+          oc: new Date().toISOString(),
+          dl: document.documentElement.lang,
+          ss: window.screen.width + "x" + window.screen.height,
+          sc: window.screen.colorDepth,
+          tz: new Date().getTimezoneOffset(),
+          bs: window.innerWidth + "x" + window.innerHeight,
+          pc: window.location.pathname,
+          ap: ( typeof url_page !== "undefined" ) ? url_page : "",
+          ps: (document.referrer.length > 0 && document.referrer.lastIndexOf(window.location.origin, 0) === 0 
+                  ? (function parseurl(){var parser = document.createElement('a'); parser.href = document.referrer; return parser.pathname.substring(0, 255);})() 
+                  : ""),
+          pt: document.title,
+          px: Math.round(window.pageXOffset),
+          py: Math.round(window.pageYOffset),
+          s6: ( typeof clientreconnu !== "undefined" && clientreconnu === "Y" ? true : false ),
+          s7: (typeof alias !== "undefined" ? alias : ""),
+          s11: (window.location.href.split('/')[2].charAt(3) === "-") ? window.location.href.split("/")[2].split("-")[0] : "prod"
+        });
+
+        $.ajax({
+            url: "https://dclic-events.e-i.com/",
+            type: "POST",
+            headers: { "Access-Control-Allow-Origin": "*", "Origin": document.location.origin },
+            crossDomain: true,
+            contentType: "application/json",
+            data: JSON.stringify(evt),
+            dataType: "json",
+            xhrFields: { withCredentials: true },
+            success: function (res) {
+              var tid = null;
+              if (res) {
+                tid = res.dclic_tid;
+              }
+              setTimeout(function() { dclicClient.resolve(tid); }, 5000);
+              }
+        });
+      },
+      resolve: function(dclic_tid) {
+        var url = "https://dclic-resolver.e-i.com/";
+        if (dclic_tid) {
+          url += dclic_tid;
+        }
+        $.ajax({
+          url: url,
+          type: "GET",
+          headers: { "Access-Control-Allow-Origin": "*", "Origin": document.location.origin },
+          crossDomain: true,
+          contentType: "application/json",
+          xhrFields: { withCredentials: true },
+          success: function(res, status) {
+            if (res !== null && 'dclicseg' in res) {
+              document.cookie = "dclic_seg=" + res.dclicseg + "; path=/";
+            }
+          }
+        });
+      }
+    };
+
+    dclicClient.init();
+
+    function eia(action, data){
+      if (action === "set") {
+        dclicClient.setEid(data.eid);
+        dclicClient.setAid(data.aid);
+      }
+    }
+  }
+}
+}
+    
+</script>
+<!-- Datasinks V1 -->
+<!-- Datasinks V2 -->
+<script type="text/javascript">
+    function getCookieDatasinks(nomCookie) {
+    deb=document.cookie.indexOf(nomCookie+"=");
+    if (deb>=0) {
+        deb+=nomCookie.length+1;
+        fin=document.cookie.indexOf(";",deb);
+        if (fin<0) {
+            fin=document.cookie.length;
+        }
+    return unescape(document.cookie.substring(deb,fin));
+    }
+    else { 
+        return "";
+    }
+}
+
+if (typeof(getCookieDatasinks) != "undefined" && getCookieDatasinks('cookies_accepted') != null && getCookieDatasinks('cookies_accepted') != "") {
+    if (getCookieDatasinks('cookies_accepted') == "1" || getCookieDatasinks('cookies_accepted').match("cookie_marketing=true")) {
+        (function(l, o, a, d, i, n, g) {
+            l.__ds_name__ = i;
+            l[i] = l[i] || function(m) {
+                m = m || "_default";
+                return l[i][m] = l[i][m] || function s(o, f) {
+                    if (
+                        o + f === "usertraits") return function t() {
+                        (t._q = t._q || []).push(arguments)
+                    };
+                    s !== l[i][m] && l[i][m].apply(null, arguments) || (s._q = s._q || []).push(arguments)
+                }
+            };
+            n = o.createElement(a);
+            g = o.getElementsByTagName(a)[0];
+            n.async = 1;
+            n.src = d;
+            g.parentNode.insertBefore(n, g)
+        })(window, document, "script", "https://cdnii.e-i.com/SDUT/sd/datasinks/0.1.0/js/ds.min.js", "ds");
+        if (typeof ds === "function") {
+            ds()("init", {
+                api: "https://ingester.ds2.e-i.com/ing1",
+                seg: "https://ingester.ds2.e-i.com/aud1/segments",
+                pid: "ef70ea6a",
+                cookieDuration: 395
+            });
+            ds()("segments", function(segs) {
+                setTimeout(function() {
+                    if (segs.length > 0) {
+                        // Datasinks V2 segments cookie: max-age=one year
+                        document.cookie = "dsseg=" + segs.join('') + "; max-age=31536000; path=/";
+                    }
+                }, 5000);
+            });
+        }
+    }
+}
+    
+</script>
+<!-- Datasinks V2 -->
+
+<link type="text/css" rel="stylesheet" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/css/ei_custom_messenger.css" />
+<link type="text/css" rel="stylesheet" href="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/css/ei_custom_scrollzone.css" />
+
+
+</head>
+<body>
+
+
+<ul id="e_raccourci">
+	<li><a href="/fr/authentification.html">Identification</a></li>
+    <li><a href="#ei_tpl_content">Contenu principal</a></li>
+	<li><a href="#ei_tpl_footer">Pied de page</a></li>
+	<li><a href="/fr/services/messagerie-conversation.html" target="_blank">Votre conseiller</a></li>
+</ul>
+
+<head></head>
+
+<div id="ei_tpl_menuMobil">
+	<div id="ei_tpl_mMobContent">
+		<div id="ei_tpl_mMobPrincipal"></div>
+	</div>
+</div>
+<div id="ei_tpl_fullsite" class="ei_tpl_conseil ei_nobackground ei_homepage ei_cic2015">	
+	<header id="ei_tpl_head" role="banner" data-sticky>
+		<div id="ei_tpl_head_center">
+			<div class="ei_tpl_head_table">
+				<div class="ei_tpl_head_td"  id="ei_tpl_menuLink">
+					<a href="#" aria-label="Menu" aria-hidden="true" title="Menu" alt="Menu"><span>Menu</span></a>
+				</div>
+				<div class="ei_tpl_head_td" id="ei_tpl_logo">
+					
+<div itemtype="http://schema.org/Organization" itemscope>
+	<span itemprop="name"><abbr>CIC</abbr></span>
+</div>
+
+				</div>
+				<div class="ei_tpl_head_td" id="ei_tpl_baseline">
+					<span class="">Construisons dans un monde qui bouge</span>
+				</div>
+				<div class="ei_tpl_head_td" id="ei_tpl_search">
+					<h2 class="invisible">Rechercher</h2>
+<form autocomplete="off" action="/fr/search_engine.html" method="get" name="form_rechercher" class="CMSD_search" role="search" id="SRCH_form_header">
+	<label accesskey="4"  class="e_invisible" for="SRCH_top">Rechercher</label>
+	<input type="text" class="pQuery e_texte SRCH_CIC SRCH_input" placeholder="Rechercher" id="SRCH_top" name="pQuery">
+    <div class="autocomplete_search_top autocomplete_search"></div>
+	<input type="image" class="e_image" alt="Lancer la recherche" src="https://cdnii.e-i.com/INGR/sd/cic_2015/11.81.3/fr/images/std/transparent.gif">    
+</form>
+<script type="text/javascript">
+var srchConfig = {
+  redirectUrl: "/fr/SearchRedirect.aspx",
+  searchAjaxUrl: "/fr/SearchAjax.html",
+  formUrl: "/fr/search_engine.html"
+};
+</script>
+ 
+
+				</div>
+				<div class="ei_tpl_head_td ei_tpl_ident" id="ei_tpl_devenirclient">
+					<div class="ei_tpl_dclient_content">
+        <p class="ei_tpl_dclient_title"><a href="/fr/banques/devenir-client.html">Devenir client</a></p>
+        <p>du<abbr>
+CIC</abbr></p>
+</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="CYB1_VOC_LIGHTBOX"></div>
+
+	<div id="ei_tpl_contener">
+		<main id="ei_tpl_content" role="main">
+			<html lang="fr">
+<head></head>
+<body>
+<div class="cc">
+	<!-- NO LINK_ID FOUND -->
+	<div class="panels" data-open-panel="PAR">
+		<article id="CIC">
+			<h1>Groupe <abbr>CIC</abbr></h1>
+			<p class="actions">
+				<a href="/fr/banques/institutionnel/index.html" title="Accéder à l'espace Institutionnel">Accéder</a>
+			</p>
+
+			<!--<div class="ctxt-featured">
+	<figure>
+		<img src="/partage/fr/I14/CIC/images/dossiers/institutionnel_qui-sommes-nous/CIC-3D.png" width="400" height="225" alt="" />
+	</figure>
+	<div class="banner">
+		<h2>Qui sommes-nous&nbsp;?</h2>
+		<p class="intro">Fondé en 1859, le <abbr>CIC</abbr> est la plus ancienne banque de dépôts en France. C’est aujourd’hui un grand groupe de bancassurance. Racheté en 1998 par le Crédit&nbsp;Mutuel, il forme avec lui un ensemble de tout premier plan.</p>
+		<a href="/fr/banques/institutionnel/index.html" class="more"><span>Découvrir le <abbr>CIC</abbr></span></a>
+	</div>
+</div>-->
+
+
+
+<div class="ctxt-featured">
+	<div class="banner">
+    
+		<h2>Coronavirus Covid-19</i></h2>
+       <p class="intro">Le <abbr>CIC</abbr> est aux côtés de ses clients dans ces circonstances exceptionnelles.</p>
+		<a href="/fr/coronavirus-covid-19-cic-a-vos-cotes.html" class="more"><span>En savoir plus</span></a>
+       
+	</div>
+</div>
+
+		</article>
+		<article id="PAR">
+			<h1>Particuliers</h1>
+			<p class="actions">
+				<a href="/fr/banques/particuliers/index.html" title="Accéder à l'espace Particuliers">Accéder</a>
+			</p>
+
+			<!--<div class="ctxt-featured">
+	<figure>
+		<img class="margins" src="/partage/fr/CC/CIC-2015/assets/produits/box-eit/Box-CIC.jpg" width="290" height="" alt="Box CIC Mobile" />
+	</figure>
+	<div class="banner">
+    
+		<h2>Box CIC&nbsp;<i>Mobile</i></h2>
+       <p class="intro"> Internet ultra-rapide, jusqu'à 160&nbsp;chaînes&nbsp;<abbr>TV</abbr>, Téléphonie illimitée&hellip; Passez au Très&nbsp;Haut&nbsp;Débit à&nbsp;partir&nbsp; <big>de 15,99&nbsp;&euro;</big>/mois pendant 12&nbsp;mois. Voir conditions.</p>
+		<a data-ga-category="CallToAction" data-ga-action="Decouverte" data-ga-label="Decouvrir_Campagne_cic_2019-01_par_lancement-box" href="/fr/particuliers/mobile/box/offre-tres-haut-debit.html" class="more"><span>Testez votre éligibilité</span></a>
+       
+	</div>
+</div>-->
+
+<div class="ctxt-featured">
+	<div class="banner">
+    
+		<h2>Coronavirus Covid-19</i></h2>
+       <p class="intro">Le CIC est aux côtés de ses clients dans ces circonstances exceptionnelles.</p>
+		<a href="/fr/coronavirus-covid-19-cic-a-vos-cotes.html" class="more"><span>En savoir plus</span></a>
+       
+	</div>
+</div>
+
+		</article>
+		<article id="PRO">
+			<h1>Professionnels</h1>
+			<p class="actions">
+				<a href="/fr/banques/professionnels/index.html" title="Accéder à l'espace Professionnels">Accéder</a>
+			</p>
+
+			<!--<div class="ctxt-featured">
+	<figure>
+		<img src="/partage/fr/I14/CIC/images/dossiers/mobilite-bancaire_ce-qui-change-au-6-fevrier-2017/home.png" width="400" height="225" alt="" />
+	</figure>
+	<div class="banner">
+		<h2>Mobilité bancaire</h2>
+		<p class="intro">La Loi Macron introduit des règles visant à faciliter la mobilité bancaire des particuliers. En tant qu'émetteur de prélèvements ou de virements, vous êtes impacté. Les détails.</p>
+		<a href="/fr/banques/professionnels/dossiers/loi-macron_mobilite-bancaire_ce-qui-change-au-6-fevrier-2017.html" class="more"><span>Les détails</span></a>
+	</div>
+</div>-->
+
+
+
+<div class="ctxt-featured">
+	<div class="banner">
+		<h2>Prêt Garanti par l’État</h2>
+		<p class="intro">Le <abbr>CIC</abbr> vous apporte son soutien grâce à un dispositif de crédit de trésorerie garanti par l’État via BPIfrance.</p>
+		<a href="/fr/professionnels/financements/covid-19-pret-garanti-par-etat.html" class="more"><span>Découvrir notre offre</span></a>
+	</div>
+</div>
+
+
+		</article>
+		<article id="ENT">
+			<h1>Entreprises</h1>
+			<p class="actions">
+				<a href="/fr/banques/entreprises/index.html" title="Accéder à l'espace Entreprises">Accéder</a>
+			</p>
+
+			<!--<div class="ctxt-featured">
+	<figure>
+		<img src="/partage/fr/I14/CIC/images/dossiers/comment-securiser-vos-operations-bancaires/400x225-home.png" width="400" height="225" alt="" />
+	</figure>
+	<div class="banner">
+		<h2>Comment sécuriser vos opérations bancaires&nbsp;?</h2>
+		<p class="intro">La sécurisation des opérations bancaires est aussi une question d’organisation et de comportement. Voici un aperçu des bonnes pratiques.</p>
+		<a href="/fr/banques/entreprises/dossiers/securite_comment-securiser-vos-operations-bancaires.html" class="more"><span>Voir la vidéo</span></a>
+	</div>
+</div>-->
+
+
+<div class="ctxt-featured">
+	<div class="banner">
+		<h2>Prêt Garanti par l’État</h2>
+		<p class="intro">Le <abbr>CIC</abbr> vous apporte son soutien grâce à un dispositif de crédit de trésorerie garanti par l’État via BPIfrance.</p>
+		<a href="/fr/entreprises/financements/covid-19-pret-garanti-par-etat.html" class="more"><span>Découvrir notre offre</span></a>
+	</div>
+</div>
+
+
+
+		</article>
+		<article id="GCO">
+			<h1>Grands Comptes</h1>
+			<p class="actions">
+				<a href="/fr/banques/corporate/index.html" title="Accéder à l'espace Grands Comptes">Accéder</a>
+			</p>
+
+			<!--<div class="ctxt-featured">
+	<figure>
+		<img src="/partage/fr/I14/CIC/images/dossiers/direction-des-grands-comptes/400x225-home.png" width="400" height="225" alt="" />
+	</figure>
+	<div class="banner">
+		<h2><abbr>CIC</abbr> Corporate</h2>
+		<p class="intro">Présentation de Crédit&nbsp;Mutuel Alliance&nbsp;Fédérale, activités et organisation, qualité et certification <abbr>ISO</abbr>, interlocuteurs...</p>
+		<a href="/fr/banques/corporate/cic-corporate/index.html" class="more"><span>Découvrir <abbr>CIC</abbr> Corporate</span></a>
+	</div>
+</div>-->
+
+
+<div class="ctxt-featured">
+	<div class="banner">
+		<h2>Prêt Garanti par l’État</h2>
+		<p class="intro">Le <abbr>CIC</abbr> vous apporte son soutien grâce à un dispositif de crédit de trésorerie garanti par l’État via BPIfrance.</p>
+		<a href="/fr/entreprises/financements/covid-19-pret-garanti-par-etat.html" class="more"><span>Découvrir notre offre</span></a>
+	</div>
+</div>
+
+
+		</article>
+		<article id="ASSO">
+			<h1>Associations</h1>
+			<p class="actions">
+				<a href="/fr/banques/associations/index.html" title="Accéder à l'espace Associations">Accéder</a>
+			</p>
+
+			<!--<div class="ctxt-featured">
+	<figure>
+		<img src="/partage/fr/I14/CIC/images/produits/pack-association-cic/400x225-home.png" width="400" height="225" alt="" />
+	</figure>
+	<div class="banner">
+		<h2>Pack Associations <abbr>CIC</abbr></h2>
+		<p class="intro">Cotisations, adhésions, dons... encaissez par internet en toute simplicité, même sans site internet.</p>
+		<a href="#" class="more"><span>Découvrir le Pack Associations&nbsp;<abbr>CIC</abbr></span></a>
+	</div>
+</div>-->
+
+
+<div class="ctxt-featured">
+	<div class="banner">
+		<h2>Prêt Garanti par l’État</h2>
+		<p class="intro">Le <abbr>CIC</abbr> vous apporte son soutien grâce à un dispositif de crédit de trésorerie garanti par l’État via BPIfrance.</p>
+		<a href="/fr/associations/financements/covid-19-pret-garanti-par-etat.html" class="more"><span>Découvrir notre offre</span></a>
+	</div>
+</div>
+
+		</article>
+	</div>
+</div>
+</body>
+</html>
+
+		</main>
+	</div>
+	<div id="ei_tpl_footer">
+		<footer role="contentinfo">
+			<nav>
+				<div id="ei_tpl_footerlinks">
+<ul>
+<!--//	<li><a href="/fr/banques/aide-et-accessibilite.html">Aide et accessibilité</a></li> //-->
+	<!-- <li><a href="/partage/fr/I14/CIC/rss/particuliers.xml" data-perso-espace="yes" data-Particulier="/partage/fr/I14/CIC/rss/particuliers.xml" data-Professionnel="/partage/fr/I14/CIC/rss/professionnels.xml" data-Entreprise="/partage/fr/I14/CIC/rss/entreprises.xml" data-Association="/partage/fr/I14/CIC/rss/associations.xml"><abbr>RSS</abbr></a></li> -->
+	<li><a href="/fr/banques/recrutement/index.html">Recrutement</a></li>
+	<li><a href="/fr/informations-legales/tarifs.html">Tarifs et conditions générales</a></li>
+	<li><a href="/fr/plan-du-site.html">Plan du site</a></li>
+<!--//	<li><a href="#">Autres sites</a></li> //-->
+	<li><a href="/fr/informations-legales/mentions-legales.html">Mentions légales</a></li>
+	<li><a href="/fr/informations-legales/index.html">Informations réglementaires</a></li>
+	<li><a href="/fr/protection-des-donnees-personnelles/index.html">Protection des données</a></li>
+	<li><a href="/fr/informations-legales/gestion-des-cookies.html">Gestion des cookies</a></li>
+	<li class="ei_sm_footer_line">
+		
+	</li>
+</ul><span class="invisible">Choix d'une langue</span>
+		<ul id="ei_tpl_lang">
+			<li class="e-select"><span>FR</span></li>
+			<li><a href="/en/" lang="en" hreflang="en" aria-label="English version" title="English version">EN</a></li>
+			<li><a href="/de/" lang="de" hreflang="de" aria-label="Deutsch Version" title="Deutsch Version">DE</a></li>
+			<li><a href="/es/" lang="es" hreflang="es" aria-label="Versión española" title="Versión española">ES</a></li>
+		</ul>
+<div class="nof"></div>
+<a title="Retour haut de page" aria-label="Retour haut de page" id="ei_tpl_hpage" href="#ei_tpl_fullsite">Top</a>
+</div>
+			</nav>
+		</footer>
+	</div>
+</div>
+
+	<div class="ei_cookie" id="ei_cookie" style="display:none;">
+		<div class="ei_cookie__wrapper">
+			<p>
+                En poursuivant votre navigation sur notre site, vous acceptez l'utilisation de cookies pour sécuriser votre connexion, faciliter votre navigation, vous proposer des offres adaptées et permettre l'élaboration de statistiques. Informations cookies et paramétrage, <a title="Page de pr&eacute;sentation des cookies" target="_blank" href="/fr/informations-legales/gestion-des-cookies.html">cliquez ici.</a>
+            </p>
+			<div class="ei_cookie__blocboutons">
+				<button title="Accepter l'utilisation des cookies" class="allow" type="button" onclick="acceptallcookies(pathCookie);location.reload();">OK</button>
+				<!-- <button title="Personnaliser" type="button" onclick="openPanel()">Personnaliser </button> document.getElementById('ei_cookie').style.display = 'none'; -->
+			</div>
+		</div>
+	</div>
+	<div class="ei_cookie ei_cookie--perso" id="ei_cookie_perso" style="display:none;">
+		<div class="ei_cookie__wrapper">
+			<p>Personnalisation des cookies</p>
+			<p>
+				<span class="ei_cookie__label">Cookies d'audience</span>
+				<button id="AllowAudience" class="allow" title="Audience" type="button" onclick="acceptCookieCategory('cookie_audience', pathCookie);this.className='allow choix';document.getElementById('DenyAudience').className='deny';">Autoriser</button>
+				<button id="DenyAudience" class="deny" title="Audience" type="button" onclick="denyCookieCategory('cookie_audience', pathCookie);this.className='deny choix';document.getElementById('AllowAudience').className='allow';">Interdire</button>
+			</p>
+			<p>
+				<span class="ei_cookie__label">Cookies marketing</span>
+				<button id="AllowMarketing" class="allow" title="Marketing" type="button" onclick="acceptCookieCategory('cookie_marketing', pathCookie);this.className='allow choix';document.getElementById('DenyMarketing').className='deny';">Autoriser</button>
+				<button id="DenyMarketing" class="deny" title="Marketing" type="button" onclick="denyCookieCategory('cookie_marketing', pathCookie);this.className='deny choix';document.getElementById('AllowMarketing').className='allow';">Interdire</button>
+			</p>
+			<p>
+				<span class="ei_cookie__label">Cookies r&eacute;seaux sociaux</span>
+				<button id="AllowReseaux" class="allow" title="Reseaux" type="button" onclick="acceptCookieCategory('cookie_reseaux', pathCookie);this.className='allow choix';document.getElementById('DenyReseaux').className='deny';">Autoriser</button>
+				<button id="DenyReseaux" class="deny" title="Reseaux" type="button" onclick="denyCookieCategory('cookie_reseaux', pathCookie);this.className='deny choix';document.getElementById('AllowReseaux').className='allow';">Interdire</button>
+			</p>
+			<button title="Valider" type="button"
+			onclick="closeCategory();location.reload();">Fermer</button>
+		</div>
+	</div>
+<script type="text/javascript" src="https://cdnii.e-i.com/SITW/sd/tools/1.12.1/javascripts/SITW-tools.js"></script>
+<!-- <script type="text/javascript" src="/fr/html/gabarit/sitw-cookies.js"></script>
+ --><script type="text/javascript">
+	document.body.onload = '';
+	var pathCookie = "/fr/";
+	document.addEventListener("DOMContentLoaded", function(event){
+		checkAndSetCookiesAcceptance(['/fr/informations-legales/gestion-des-cookies.html'], pathCookie);
+	});
+	</script>
+
+<!-- Fin code bandeau cookie CNIL -->
+
+
+	<script type="text/javascript">
+	if($("#ei_tpl_ident_ok").length>0){
+		$("body").addClass("ei_tpl_conseil_ident");
+	}
+</script>
+
+<!-- Web Analytics -->
+<script type="text/javascript">
+if (typeof(page_name) == 'undefined') var page_name = "CIC";
+if (typeof(espacewat) == 'undefined') var espacewat = "";
+if (typeof(url_page) == 'undefined') var url_page = "";
+if (typeof(env_template) == 'undefined' || env_template == "") var env_template = 'page';
+var clientidentifie = 'false';
+var clientreconnu = 'N';
+var user_statut = '';
+if (clientidentifie == "false" && clientreconnu == "N"){
+	user_statut = "prospect";
+	}
+else if (clientidentifie == "false" && clientreconnu == "Y") {
+	user_statut = "client reconnu";
+	}
+else if (clientidentifie == "true") {
+	user_statut = "client authentifie";
+};
+	var watData = {
+		page_name:page_name,
+		espace:espacewat,
+		typepage:env_template,
+		statutuser:user_statut,
+		env_channel:"",
+		user_profil_cb:"",
+		user_profil_assurance:"",
+		user_profil_bourse:"",
+		user_profil_compte:"",
+		user_profil_credit:"",
+		user_profil_epargne:"",
+		user_client_nonlog:"N",
+		env_work:"PRD",
+		user_profil_ass:"",
+		user_profil_aug:"",
+		user_profil_fin:"",
+		user_profil_pcb:"",
+		user_profil_reconduction:"",
+		user_profil_annulfin:"",
+		user_segment:"",
+		product_code_promo:"",
+		env_camtype:"",
+		env_support:"",
+		user_federation:"",
+		user_portef_theorique:"",
+		substitution_mode:"",
+		type_acces:"",
+		user_agence:"",
+		user_formule_bad:"",
+		user_frequence_BAD:"",
+		user_niveau:"",
+		user_segment_commercial:"",
+		user_type_client:"",
+		user_type_personne:"",
+		env_marque:"CIC-2015",
+		env_country:"FR",
+		env_langue:"fr",
+		env_espace:"Aucun",
+		user_profil_suividde_analyse:"##",
+		user_profil_suividde_instruction:"##",
+		user_space:"",
+		user_bank:"",
+		client_connecte:"false",
+		user_rawfinancable:"",
+		user_financable:"",
+		user_issubst:"",
+		page_cat1:"CIC",
+		page_cat2:"",
+		page_cat3:"",
+		page_cat4:"",
+		page_cat5:"",
+		application_path:url_page,
+		relation_group:"",
+		cat_juridique:"",
+		dir_reg:""
+	};
+</script>
+<script>
+if (typeof(dataLayer) == 'undefined') var dataLayer = [];
+if (typeof(url_page) == 'undefined' || url_page == "") var url_page = "";
+if (typeof(page_name) != "undefined" && page_name != "")dataLayer.push({'page_name' : page_name});
+if (typeof(space) == 'undefined') var space = "";
+if (typeof(subspace) == 'undefined') var subspace = "";
+if (typeof(application_name) == 'undefined') var application_name = "";
+if (typeof(product_name) == 'undefined') var product_name = "";
+if (typeof(souscription_etape) == 'undefined') var souscription_etape = "";
+if (typeof(souscription_page_name) == 'undefined') var souscription_page_name = "";
+if (typeof(espacewat) == 'undefined') var espacewat = "";
+if (typeof(env_template) == 'undefined' || env_template == "") var env_template = 'page';
+var clientidentifie = 'false';
+var clientreconnu = 'N';
+var user_statut = '';
+if (clientidentifie == "false" && clientreconnu == "N"){
+	user_statut = "prospect";
+	}
+else if (clientidentifie == "false" && clientreconnu == "Y") {
+	user_statut = "client reconnu";
+	}
+else if (clientidentifie == "true") {
+	user_statut = "client authentifie";
+};
+if (espacewat != "")dataLayer.push({'espace' : espacewat});
+if (space != "")dataLayer.push({'space' : space});
+if (subspace != "")dataLayer.push({'subspace' : subspace});
+if (application_name != "")dataLayer.push({'application_name' : application_name});
+var federation = "";
+if (federation != "")dataLayer.push({'federation' : federation});
+var caisse = "";
+if (caisse != "")dataLayer.push({'caisse' : caisse});
+var contratbad = "";
+if (contratbad != "")dataLayer.push({'contratbad' : contratbad});
+var typeclient = "";
+if (typeclient != "")dataLayer.push({'typeclient' : typeclient});
+if (clientidentifie != "")dataLayer.push({'clientidentifie' : clientidentifie});
+if (clientreconnu != "")dataLayer.push({'clientreconnu' : clientreconnu});
+var alias = "";
+if (alias != "")dataLayer.push({'alias' : alias});
+var typomarche = "";
+if (typomarche != "")dataLayer.push({'typomarche' : typomarche});
+var activitebad = "";
+if (activitebad != "")dataLayer.push({'activitebad' : activitebad});
+var surfacefinanciere = "";
+if (surfacefinanciere != "")dataLayer.push({'surfacefinanciere' : surfacefinanciere});
+var langue = "fr";
+if (langue != "")dataLayer.push({'langue' : langue});
+var enviro = "PRD";
+if (enviro != "")dataLayer.push({'enviro' : enviro});
+var canal = "WEB_DESKTOP";
+if (canal != "")dataLayer.push({'canal' : canal});
+var sousespaces = "Aucun";
+if (sousespaces != "")dataLayer.push({'sousespaces' : sousespaces});
+if (env_template != "")dataLayer.push({'typepage' : env_template});
+var espaceclientreconnu = "";
+if (espaceclientreconnu != "")dataLayer.push({'espaceclientreconnu' : espaceclientreconnu});
+var offre = "";
+if (offre != "")dataLayer.push({'offre' : offre});
+if (user_statut != "")dataLayer.push({'statutclient' : user_statut});
+var usernivauto = "";
+if (usernivauto != "")dataLayer.push({'usernivauto' : usernivauto});
+var usersubst = "";
+if (usersubst != "")dataLayer.push({'usersubst' : usersubst});
+var usernivacc = "";
+if (usernivacc != "")dataLayer.push({'usernivacc' : usernivacc});
+var typeacces = "";
+if (typeacces != "")dataLayer.push({'typeacces' : typeacces});
+if (url_page != "")dataLayer.push({'url_page' : url_page});
+if (product_name != "")dataLayer.push({'product_name' : product_name});
+if (souscription_etape != "")dataLayer.push({'souscription_etape' : souscription_etape});
+if (souscription_page_name != "")dataLayer.push({'souscription_page_name' : souscription_page_name});
+var user_ega = "";
+if (user_ega != "")dataLayer.push({'user_ega' : user_ega});
+var user_dreg = "";
+if (user_dreg != "")dataLayer.push({'user_dreg' : user_dreg});
+var page_cat1 = "CIC";
+if (page_cat1 != "")dataLayer.push({'page_cat1' : page_cat1});
+var page_cat2 = "";
+if (page_cat2 != "")dataLayer.push({'page_cat2' : page_cat2});
+var page_cat3 = "";
+if (page_cat3 != "")dataLayer.push({'page_cat3' : page_cat3});
+var page_cat4 = "";
+if (page_cat4 != "")dataLayer.push({'page_cat4' : page_cat4});
+var page_cat5 = "";
+if (page_cat5 != "")dataLayer.push({'page_cat5' : page_cat5});
+if (typeof(options) == 'undefined') var options = "";
+if (options != "")dataLayer.push({'options' : options});
+if (typeof(prjcli_modification_projet) != 'undefined' && prjcli_modification_projet != "") dataLayer.push({'prjcli_modification_projet': prjcli_modification_projet});
+if (typeof(prjcli_modification_nom_projet) != 'undefined' && prjcli_modification_nom_projet != "") dataLayer.push({'prjcli_modification_nom_projet': prjcli_modification_nom_projet});
+if (typeof(prjcli_modification_cin) != 'undefined' && prjcli_modification_cin != "") dataLayer.push({'prjcli_modification_cin': prjcli_modification_cin});
+</script>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WMXC9XJ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WMXC9XJ');</script>
+<!-- End Google Tag Manager -->
+
+
+
+<script type='text/javascript'>
+var tags = ['OTH','GTM'];
+</script>
+
+<!-- fin Web Analytics -->
+
+<!-- Datasinks V1 -->
+<script type="text/javascript">
+    if (typeof eia === "function") {
+        var data = {};
+        if (typeof watData !== "undefined") {
+            var mapping = {"d1":"espace","d12":"env_langue","d15":"env_espace","d16":"typepage","d18":"statutuser","d19":"substitution_mode","d197":"product_code_promo","d194":"page_cat1","d193":"page_cat2","d192":"page_cat3","d191":"page_cat4","d190":"page_cat5"};
+            for (var key in mapping) {
+                var wat_key = mapping[key];
+                if (watData.hasOwnProperty(wat_key)) {
+                    data[key] = watData[wat_key];
+                }
+            }
+        }
+        eia("record", "Page Viewed", data);
+    }
+</script>
+<!-- Datasinks V1 -->
+<!-- Datasinks V2 -->
+<script type="text/javascript">
+    if (typeof ds === "function") {
+        var ds_data = {};
+        if (typeof watData !== "undefined") {
+            var mapping = ["espace","env_langue","env_espace","typepage","statutuser","substitution_mode","product_code_promo","page_cat1","page_cat2","page_cat3","page_cat4","page_cat5","application_path"];
+            for (var key in mapping) {
+                var wat_key = mapping[key];
+                if (watData.hasOwnProperty(wat_key)) {
+                    ds_data[wat_key] = watData[wat_key];
+                }
+            }
+        }
+        page_info = {
+            page_current_url: document.location.href.split('?')[0],
+            page_source_url: document.referrer.split('?')[0],
+            page_path: document.location.pathname,
+            page_title: document.title
+        };
+        ds_data = $.extend(page_info, ds_data);
+        ds()("record", "page_viewed", ds_data);
+    }
+</script>
+<!-- Datasinks V2 -->
+
+<!-- ei-msgs-chat -->
+
+</body>
+</html>

@@ -1,241 +1,344 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Accueil
-			{% endblock %}
-		</title>
-		{% block stylesheets %}
-			<link
-			href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+<title>
+	{% block title %}Accueil
+	{% endblock %}
+</title>
 
-			<!-- Animate.css -->
-			<link
-			rel="stylesheet" href="{{ asset('./web/css/animate.css') }}">
-			<!-- Icomoon Icon Fonts-->
-			<link rel="stylesheet" href="{{ asset('./web/css/icomoon.css') }}">
-			<link
-			rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% block stylesheets %}
 
-			<!-- Flexslider  -->
-			<link
-			rel="stylesheet" href="{{ asset('./web/css/flexslider.css') }}">
-			<!-- Flaticons  -->
-			<link
-			rel="stylesheet" href="{{ asset('./web/fonts/flaticon/font/flaticon.css') }}">
-			<!-- Owl Carousel -->
-			<link rel="stylesheet" href="{{ asset('./web/css/owl.carousel.min.css') }}">
-			<link
-			rel="stylesheet" href="{{ asset('./web/css/owl.theme.default.min.css') }}">
-			<!-- Theme style  -->
-			<link rel="stylesheet" href="{{ asset('./web/css/style.css') }}">
+	<link rel="stylesheet" href="{{asset('./web/wp-content/cache/min/1/f7439ba9c58103cf0cd1860b698d15e2.css')}}" data-minify="1">
 
+	<link rel="icon" href="{{asset('./web/img/favicon.ico')}}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+		#black {
+			color: black;
 
-		{% endblock %}
-		{% block javascripts %}
+		}
+		#white {
+			color: white;
 
-			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-			<script src="{{ asset('./web/js/jquery.min.js') }}"></script><!-- jQuery Easing --><script src="{{ asset('./web/js/jquery.easing.1.3.js') }}"></script><!-- Bootstrap --><script src="./web/js/bootstrap.min.js"></script><!-- Waypoints --><script src="{{ asset('./web/js/jquery.waypoints.min.js') }}"></script><!-- Flexslider --><script src="{{ asset('./web/js/jquery.flexslider-min.js') }}"></script><!-- Sticky Kit --><script src="{{ asset('./web/js/sticky-kit.min.js') }}"></script><!-- Owl carousel --><script src="{{ asset('./web/js/owl.carousel.min.js') }}"></script><!-- Counters --><script src="{{ asset('./web/js/jquery.countTo.js') }}"></script><!-- MAIN JS --><script src="{{ asset('./web/js/main.js') }}"></script>
-			<!-- Modernizr JS -->
-			<script src="{{ asset('./web/js/modernizr-2.6.2.min.js') }}"></script>
-			<!-- FOR IE9 below -->
-			<!--[if lt IE 9]>
-														<script src="{{ asset('./web/js/respond.min.js') }}"></script>
-														<![endif]-->
-		{% endblock %}
-	</head>
+		}
+	</style>
+	<style>
+		type="text/css" img.wp-smiley,
+		img.emoji {
+			display: inline !important;
+			border: none !important;
+			box-shadow: none !important;
+			height: 1em !important;
+			width: 1em !important;
+			margin: 0 0.07em !important;
+			vertical-align: -0.1em !important;
+			background: none !important;
+			padding: 0 !important;
+		}
+	</style>
 
-	<body>
+	<link href="{{asset('./web/css.css?family=Ubuntu:400,300,500,700&#038;display=swap')}}" rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+{% block script %}
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script async="" src="{{asset('./web/gtag/js.js?id=UA-18636698-1')}}"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+function gtag() {
+dataLayer.push(arguments);
+}
+gtag('js', new Date());
 
-		<div id="colorlib-page">
-			<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle">
-				<i></i>
-			</a>
-			<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
-				<h1 id="colorlib-logo">
-					<a href="{{ path('home') }}">Auto Entrepreneur</a>
-				</h1>
-				<nav id="colorlib-main-menu" role="navigation">
-					<ul>
-						<li>
-							<a href="{{ path('home') }}">Accueil</a>
-						</li>
-						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<li>
-								<a href="{{ path('compte') }}">Mon compte</a>
-							</li>
-						{% endif %}
-						{% if is_granted('ROLE_ADMIN') %}
-							<li>
-								<a href="{{ path('demandes') }}">Demandes</a>
-							</li>
-						{% endif %}
-						{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-							<li>
-								<a href="{{ path('app_login') }}">Se Connecter</a>
-							</li>
-						{% endif %}
-						{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-							<li>
-								<a href="{{ path('register') }}">S'inscrire</a>
-							</li>
-						{% endif %}
-						<li>
-							<a href="{{ path('create') }}">Créer mon auto-entreprise</a>
-						</li>
-						<li>
-							<div class="dropdown">
-								<a href="{{ path('gestion') }}">Gérer mon auto-entreprise</a>
-							</li>
-						</li>
-						<li>
-							<a href="{{ path('contact') }}">Contact</a>
-						</li>
-						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<li>
-								<a href="{{ path('app_logout') }}">Se déconnecter</a>
-							</li>
-						{% endif %}
-					</ul>
-				</nav>
+gtag('config', 'UA-18636698-1');
+	</script>
 
-				<div class="colorlib-footer">
-					<p>
-						<small>&copy;
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script>
-							All rights reserved | This template is made with
-							<i class="icon-heart" aria-hidden="true"></i>
-							by
-							<a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
-						<span>Demo Images:
-							<a href="http://nothingtochance.co/" target="_blank">nothingtochance.co</a>
-						</span>
-					</p>
-				</small>
-			</p>
-			<ul>
-				<li><a href="#"><i class="icon-facebook2"></i></a></li>
-				<li><a href="#"><i class="icon-twitter2"></i></a></li>
-				<li><a href="#"><i class="icon-instagram"></i></a></li>
-				<li><a href="#"><i class="icon-linkedin2"></i></a></li>
-			</ul>
-		</div>
-	</body>
-</html></aside>{% block body %}
-<div id="colorlib-main">
-	<aside id="colorlib-hero" class="js-fullheight">
-		<div class="flexslider js-fullheight">
-			<ul class="slides">
-				<li style="background-image: url(./web/images/creer.jpg);">
-					<div class="overlay"></div>
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6 mt-5 col-md-offset-3 col-md-push-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-								<div class="slider-text-inner">
-									<div class="desc">
-										<h1>Créer mon auto-entreprise</h1>
-										<p>
-											<a class="btn btn-primary btn-learn">Aller
-												<i class="icon-arrow-right3"></i>
-											</a>
-										</p>
-									</div>
+{% endblock %}
+<body class="home" id="uae" class="no-js" style="background-color:#F0F0F0">
+	<div class="global">
+		<h1 id="marque">
+			<div class="logo img">
+				<span class="semio">Union des Auto-Entrepreneurs inscription déclaration facture plafond tva</span>
+				<img src="./web/wp-content/themes/uae/img/Logo-UAE.png" alt="UAE l auto-entrepreneur autoentrepreneur micro-entrepreneur 2016">
+			</div>
+			<div class="texte semio">
+				Union des
+				<span class="semio">Micro-Entrepreneur</span><br>
+				<span class="rouge">Auto-Entrepreneurs</span>
+			</div>
+		</h1>
+		<!-- contenu -->
+		<div class="contenu">
+			<div id="vie-ae">
+				<div class="menu">
+					{% if is_granted('ROLE_ADMIN')  %}
+						<div id="item-7" class="item ">
+							<div class="picto">
+								<a id="white" href="{{ path('demandes') }}">
+									<i class="fa fa-archive" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="{{ path('demandes') }}">Les demandes</a>
+								</div>
+								<div class="accroche">
+									<p>Gérer les demandes</p>
 								</div>
 							</div>
 						</div>
-					</div>
-				</li>
-				<li style="background-image: url(./web/images/Gerer.jpg);">
-					<div class="overlay"></div>
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3 col-md-push-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-								<div class="slider-text-inner">
-									<div class="desc">
-										<h1>Gerer mon auto-entreprise</h1>
-										<p>
-											<a class="btn btn-primary btn-learn">Aller
-												<i class="icon-arrow-right3"></i>
-											</a>
-										</p>
-									</div>
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN')  %}
+						<div id="item-8" class="item ">
+							<div class="picto">
+								<a id="white" href="">
+									<i class="fa fa-usd" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="">Les paiements</a>
+								</div>
+								<div class="accroche">
+									<p>Gérer les paiements</p>
 								</div>
 							</div>
 						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</aside>
-	<div class="colorlib-about">
-		<div class="colorlib-narrow-content">
-			<div class="row">
-				<div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
-					<div class="about-desc">
-						<span class="heading-meta">Bienvenue</span>
-						<h2 class="colorlib-heading">S'informer</h2>
-						<p>L’auto-entreprise est une entreprise individuelle qui relève du régime fiscal de la micro-entreprise et du régime micro-social pour le paiement des cotisations et contributions sociales. Ce régime simplifié a été créé pour faciliter les démarches de création et de gestion de votre activité, tout en vous permettant de bénéficier d’une protection sociale dédiée.</p>
-					</div>
-					<div class="row padding">
-						<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
-							<a href="#" class="steps active">
-								<p class="icon">
-									<span>
-										<i class="icon-check"></i>
-									</span>
-								</p>
-								<h3>Creer
-									<br>votre entreprise</h3>
-							</a>
+					{% endif %}
+					{% if  is_granted('ROLE_ADMIN') == false %}
+
+						<div id="item-0" class="item ">
+							<div class="picto">
+								<i class="fa fa-info" aria-hidden="true"></i>
+							</div>
+							<div class="info">
+								<div class="titre">Je m'informe</div>
+								<div class="accroche">
+									<p>découvrir, comprendre</p>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
-							<a href="#" class="steps">
-								<p class="icon">
-									<span>
-										<i class="icon-check"></i>
-									</span>
-								</p>
-								<h3>Creer
-									<br>votre compte</h3>
-							</a>
+					{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+
+						<div id="item-1" class="item">
+							<div class="picto">
+								<a id="white" href="{{ path('create') }}">
+									<i class="fa fa-suitcase" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="{{ path('create') }}">Je crée</a>
+								</div>
+								<div class="accroche">
+									<p>valider, s'inscrire</p>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
-							<a href="#" class="steps">
-								<p class="icon">
-									<span>
-										<i class="icon-check"></i>
-									</span>
-								</p>
-								<h3>Gérer
-									<br>votre entreprise</h3>
-							</a>
+					{% endif %}
+					{% if  is_granted('ROLE_ADMIN') == false %}
+
+						<div id="item-2" class="item">
+							<div class="picto">
+								<a id="white" href="{{ path('gestion') }}">
+									<i class="fa fa-key" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="{{ path('gestion') }}">Je gère</a>
+								</div>
+								<div class="accroche">
+									<p>s'organiser, développer</p>
+								</div>
+							</div>
 						</div>
-					</div>
-					</div </div></div>
+					{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+						<div id="item-3" class="item">
+							<div class="picto">
+								<a id="white" href="{{ path('app_login') }}">
+									<i class="fa fa-sign-in" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="{{ path('app_login') }}">Se connecter</a>
+								</div>
+								<div class="accroche">
+									<p>Connectez-vous
+									</p>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<div id="item-4" class="item">
+							<div class="picto">
+								<a id="white" href="{{ path('app_logout') }}">
+									<i class="fa fa-sign-out" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="{{ path('app_logout') }}">Se déconnecter</a>
+								</div>
+								<div class="accroche">
+									<p>Déconnectez-vous
+									</p>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+						<div id="item-5" class="item">
+							<div class="picto">
+								<a id="white" href="{{ path('compte') }}">
+									<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="{{ path('compte') }}">Mon Compte</a>
+								</div>
+								<div class="accroche">
+									<p>Consulter et gérer vos informations
+									</p>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+						<div id="item-6" class="item">
+							<div class="picto">
+								<a id="white" href="{{ path('register') }}">
+									<i class="fa fa-user-plus" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="info">
+								<div class="titre">
+									<a id="black" href="{{ path('register') }}">Créez un compte</a>
+								</div>
+								<div class="accroche">
+									<p>Créez un compte</p>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+					<img src="./web/wp-content/uploads/2020/03/Alerte-2-covid-19.jpg" alt="Le pass UAE : logiciel devis facture auto entrepreneur, création de site auto entrepreneur">
 				</div>
-				<div id="get-in-touch" class="colorlib-bg-color">
-					<div class="colorlib-narrow-content">
-						<div class="row">
-							<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-								<h2>Contact!</h2>
-							</div>
+				<div class="slides">
+					{% block body %}
+						<div id="slide-0" class="slide courant">
+							<h2>Auto-entreprise</h2>
+							<p>L’auto-entreprise est une entreprise individuelle qui relève du régime fiscal de la micro-entreprise et du régime micro-social pour le paiement des cotisations et contributions sociales.<br>Ce régime simplifié a été créé pour faciliter les démarches de création et de gestion de votre activité, tout en vous permettant de bénéficier d’une protection sociale dédiée.</p>
+
+							<h2 class="mt-5">
+								Auto-entrepreneur</h2>
+							<p>Le statut auto-entrepreneur (ou micro-entrepreneur) est un régime simplifié de l’entreprise individuelle. Il permet de créer plus facilement une société à but lucratif, en profitant de démarches administratives et de procédures fiscales et sociales simplifiées</p>
+							<h2 class="mt-5">
+								Conditions</h2>
+							<p>Peuvent en bénéficier les personnes physiques de nationalité tunisienne exerçant une activité individuelle dans les domaines de l’industrie, l’agriculture, le commerce, les services et l’artisanat.<br>
+								Une liste détaillée des activités éligibles au régime de l’autoentrepreneur sera définit par décret.
+
+								<br>Pour bénéficier de ce régime d’autoentrepreneur le chiffre d’affaires ne doit pas dépasser les 75.000 dinars par an (remarque : en France par exemple cette limite est définit par type d’activité entre 72.500 et 176.200 euros).</p>
+							<h2 class="mt-5">
+								Avantages et obligations</h2>
+							
+							  <ul>
+							  <li>-Tenue d’un registre coté et paraphé des recettes et dépenses</li>
+							  <li>-l’autoentrepreneur bénéficie d’un régime fiscal et social spécial, par le paiement d’une contribution unique :
+							  <ul>
+							  <li>0,5% du chiffre d’affaires au titre des impôts sur les revenus</li>
+							  <li>7,5% contribution au régime de sécurité sociale calculée sur la base des 2/3 du salaire minimum agricole ou celui de l’activité exercé</li>
+							  </ul>
+							  </li>
+							  <li>-Ces contribution doivent être déclarées et payées trimestriellement en ligne.</li>
+							  
+							  </ul>
 						</div>
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-								<p>Nous sommes à votre disposition pour répondre à toutes vos questions.</p>
-								<a href="{{ path('contact') }}" class="btn btn-primary btn-learn">Contactez-nous!</a>
-							</p>
-						</div>
-					</div>
+
+
+					{% endblock %}
 				</div>
 			</div>
-		</div>
-	</div><!-- jQuery -->{% endblock %}</body></html>
+
+
+			<divid="menu-pied">
+				<div id="menu-bas">
+					<ul style="position:relative;margin-top:200px;margin-bottom:10px;">
+						<li>
+							<a href="">Mentions Légales</a>
+						</li>
+						<li>
+							<a href="{{path('home')}}">Union des Auto-Entrepreneurs</a>
+						</li>
+						<li>
+							<a href="{{path('contact')}}">Nous contacter</a>
+						</li>
+					</ul>
+				</div>
+				<div id="menu-principal" style="height:35px;left:0px">
+					<ul>
+						<li>
+							<a href="{{path('home')}}">
+								<i class="fa fa-home" aria-hidden="true"></i>
+								<span>Accueil</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="fa fa-book" aria-hidden="true"></i>
+								<span>Guide Officiel</span>
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="fa fa-laptop" aria-hidden="true"></i>
+								<span>Offres & conseils</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{path('contact')}}">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<span>contact</span>
+							</a>
+						</li>
+
+
+					</ul>
+					<div id="reseaux-sociaux">
+						<a href="" class="facebook">
+							<span class="socicon">b</span>
+						</a>
+						<a href="" class="linkedin">
+							<span class="socicon">j</span>
+						</a>
+						<a href="" class="twitter">
+							<span class="socicon">a</span>
+						</a>
+						<a href="" class="mail">
+							<span class="awesome">
+								<i class="fa fa-envelope"></i>
+							</span>
+						</a>
+					</div>
+				</div>
+
+
+				<!-- Quantcast Tag -->
+
+
+				<noscript>
+					<div style="display:none;">
+						<img src="./web/pixel/p-FPNzF4yzF5Ljs.gif" border="0" height="1" width="1" alt="Quantcast">
+					</div>
+				</noscript>
+				<!-- End Quantcast tag -->
+			</div>
+			<script src="{{asset('./web/wp-content/cache/min/1/c029511e7969258f96e230ce886ec645.js')}}" data-minify="1"></script>
+		</body>
+		<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1597822486 -->
+	</body>
+</body></body>

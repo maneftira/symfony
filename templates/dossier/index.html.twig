@@ -3,16 +3,16 @@
 {% block title %}Mon Dossier
 {% endblock %}
 {%  block body %}
-	<center class="container fluid col-10">
+	<div class="container ">
 
-		<div id="colorlib-main" class=' col-10 mt-5'>
-			<h1 class="h3 mb-3 font-weight-normal ">Mes documents</h1>
+		<div  class=' mt-5'>
+			<center><h1 class="h3 mb-3 font-weight-normal ">Mes documents</h1></center>
 			<hr>
 			{% for i in factures %}
 				<a href="{{path('print',{'id': i.id })}}" target="_blank">Facture numéro {{i.factureNb}}</a>
 			{% endfor %}
 		</div>
-	</center>
+	</div>
 
 
 {% endblock %}
