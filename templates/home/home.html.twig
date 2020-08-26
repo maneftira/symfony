@@ -10,16 +10,6 @@
 	<link rel="icon" href="{{asset('./web/img/favicon.ico')}}">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<style>
-		#black {
-			color: black;
-
-		}
-		#white {
-			color: white;
-
-		}
-	</style>
-	<style>
 		type="text/css" img.wp-smiley,
 		img.emoji {
 			display: inline !important;
@@ -59,226 +49,27 @@ gtag('config', 'UA-18636698-1');
 			<div class="logo img">
 				<span class="semio">Union des Auto-Entrepreneurs inscription déclaration facture plafond tva</span>
 				<img src="./web/wp-content/themes/uae/img/Logo-UAE.png" alt="UAE l auto-entrepreneur autoentrepreneur micro-entrepreneur 2016">
+
 			</div>
+
 			<div class="texte semio">
 				Union des
 				<span class="semio">Micro-Entrepreneur</span><br>
 				<span class="rouge">Auto-Entrepreneurs</span>
+
 			</div>
 		</h1>
+		<div style="float: right;" class="mr-3">
+			<a id="black" href="{{ path('compte') }}">
+				<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+			</a>
+			<a href="{{ path('compte') }}">Mon Compte</a>
+		</div>
 		<!-- contenu -->
-		<div class="contenu">
+		<div class="contenu" style="height:170%;">
 			<div id="vie-ae">
-				<div class="menu">
-					{% if is_granted('ROLE_ADMIN')  %}
-						<div id="item-7" class="item ">
-							<div class="picto">
-								<a id="white" href="{{ path('demandes') }}">
-									<i class="fa fa-archive" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="{{ path('demandes') }}">Les demandes</a>
-								</div>
-								<div class="accroche">
-									<p>Gérer les demandes</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if is_granted('ROLE_ADMIN')  %}
-						<div id="item-8" class="item ">
-							<div class="picto">
-								<a id="white" href="">
-									<i class="fa fa-usd" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="">Les paiements</a>
-								</div>
-								<div class="accroche">
-									<p>Gérer les paiements</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if  is_granted('ROLE_ADMIN') == false %}
-
-						<div id="item-0" class="item ">
-							<div class="picto">
-								<i class="fa fa-info" aria-hidden="true"></i>
-							</div>
-							<div class="info">
-								<div class="titre">Je m'informe</div>
-								<div class="accroche">
-									<p>découvrir, comprendre</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-
-						<div id="item-1" class="item">
-							<div class="picto">
-								<a id="white" href="{{ path('create') }}">
-									<i class="fa fa-suitcase" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="{{ path('create') }}">Je crée</a>
-								</div>
-								<div class="accroche">
-									<p>valider, s'inscrire</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if  is_granted('ROLE_ADMIN') == false %}
-
-						<div id="item-2" class="item">
-							<div class="picto">
-								<a id="white" href="{{ path('gestion') }}">
-									<i class="fa fa-key" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="{{ path('gestion') }}">Je gère</a>
-								</div>
-								<div class="accroche">
-									<p>s'organiser, développer</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-						<div id="item-3" class="item">
-							<div class="picto">
-								<a id="white" href="{{ path('app_login') }}">
-									<i class="fa fa-sign-in" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="{{ path('app_login') }}">Se connecter</a>
-								</div>
-								<div class="accroche">
-									<p>Connectez-vous
-									</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<div id="item-4" class="item">
-							<div class="picto">
-								<a id="white" href="{{ path('app_logout') }}">
-									<i class="fa fa-sign-out" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="{{ path('app_logout') }}">Se déconnecter</a>
-								</div>
-								<div class="accroche">
-									<p>Déconnectez-vous
-									</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-						<div id="item-5" class="item">
-							<div class="picto">
-								<a id="white" href="{{ path('compte') }}">
-									<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="{{ path('compte') }}">Mon Compte</a>
-								</div>
-								<div class="accroche">
-									<p>Consulter et gérer vos informations
-									</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-						<div id="item-6" class="item">
-							<div class="picto">
-								<a id="white" href="{{ path('register') }}">
-									<i class="fa fa-user-plus" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="info">
-								<div class="titre">
-									<a id="black" href="{{ path('register') }}">Créez un compte</a>
-								</div>
-								<div class="accroche">
-									<p>Créez un compte</p>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					<img src="./web/wp-content/uploads/2020/03/Alerte-2-covid-19.jpg" alt="Le pass UAE : logiciel devis facture auto entrepreneur, création de site auto entrepreneur">
-				</div>
-				<div class="slides">
-					{% block body %}
-						<div id="slide-0" class="slide courant">
-							<h2>Auto-entreprise</h2>
-							<p>L’auto-entreprise est une entreprise individuelle qui relève du régime fiscal de la micro-entreprise et du régime micro-social pour le paiement des cotisations et contributions sociales.<br>Ce régime simplifié a été créé pour faciliter les démarches de création et de gestion de votre activité, tout en vous permettant de bénéficier d’une protection sociale dédiée.</p>
-
-							<h2 class="mt-5">
-								Auto-entrepreneur</h2>
-							<p>Le statut auto-entrepreneur (ou micro-entrepreneur) est un régime simplifié de l’entreprise individuelle. Il permet de créer plus facilement une société à but lucratif, en profitant de démarches administratives et de procédures fiscales et sociales simplifiées</p>
-							<h2 class="mt-5">
-								Conditions</h2>
-							<p>Peuvent en bénéficier les personnes physiques de nationalité tunisienne exerçant une activité individuelle dans les domaines de l’industrie, l’agriculture, le commerce, les services et l’artisanat.<br>
-								Une liste détaillée des activités éligibles au régime de l’autoentrepreneur sera définit par décret.
-
-								<br>Pour bénéficier de ce régime d’autoentrepreneur le chiffre d’affaires ne doit pas dépasser les 75.000 dinars par an (remarque : en France par exemple cette limite est définit par type d’activité entre 72.500 et 176.200 euros).</p>
-							<h2 class="mt-5">
-								Avantages et obligations</h2>
-							
-							  <ul>
-							  <li>-Tenue d’un registre coté et paraphé des recettes et dépenses</li>
-							  <li>-l’autoentrepreneur bénéficie d’un régime fiscal et social spécial, par le paiement d’une contribution unique :
-							  <ul>
-							  <li>0,5% du chiffre d’affaires au titre des impôts sur les revenus</li>
-							  <li>7,5% contribution au régime de sécurité sociale calculée sur la base des 2/3 du salaire minimum agricole ou celui de l’activité exercé</li>
-							  </ul>
-							  </li>
-							  <li>-Ces contribution doivent être déclarées et payées trimestriellement en ligne.</li>
-							  
-							  </ul>
-						</div>
 
 
-					{% endblock %}
-				</div>
-			</div>
-
-
-			<divid="menu-pied">
-				<div id="menu-bas">
-					<ul style="position:relative;margin-top:200px;margin-bottom:10px;">
-						<li>
-							<a href="">Mentions Légales</a>
-						</li>
-						<li>
-							<a href="{{path('home')}}">Union des Auto-Entrepreneurs</a>
-						</li>
-						<li>
-							<a href="{{path('contact')}}">Nous contacter</a>
-						</li>
-					</ul>
-				</div>
 				<div id="menu-principal" style="height:35px;left:0px">
 					<ul>
 						<li>
@@ -288,21 +79,45 @@ gtag('config', 'UA-18636698-1');
 							</a>
 						</li>
 						<li>
-							<a href="">
-								<i class="fa fa-book" aria-hidden="true"></i>
-								<span>Guide Officiel</span>
+							<a href="{{path('informe')}}">
+								<i class="fa fa-info" aria-hidden="true"></i>
+								<span>Je m'informe</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{path('jeCreate')}}">
+								<i class="fa fa-suitcase" aria-hidden="true"></i>
+								<span>Je crée</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{path('jeGére')}}">
+								<i class="fa fa-suitcase" aria-hidden="true"></i>
+								<span>Je gére</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{path('jeDev')}}">
+								<i class="fa fa-key" aria-hidden="true"></i>
+								<span>Je développe</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{path('Services')}}">
+								<i class="fa fa-gears" aria-hidden="true"></i>
+								<span>Services</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{path('outils')}}">
+								<i class="fa fa-gear" aria-hidden="true"></i>
+								<span>Outils</span>
 							</a>
 						</li>
 						<li>
 							<a href="">
-								<i class="fa fa-laptop" aria-hidden="true"></i>
-								<span>Offres & conseils</span>
-							</a>
-						</li>
-						<li>
-							<a href="{{path('contact')}}">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
-								<span>contact</span>
+								<i class="fa fa-id-card" aria-hidden="true"></i>
+								<span>Annuaire</span>
 							</a>
 						</li>
 
@@ -326,19 +141,74 @@ gtag('config', 'UA-18636698-1');
 					</div>
 				</div>
 
-
-				<!-- Quantcast Tag -->
-
-
-				<noscript>
-					<div style="display:none;">
-						<img src="./web/pixel/p-FPNzF4yzF5Ljs.gif" border="0" height="1" width="1" alt="Quantcast">
+				<div>
+					{% block body %}{% endblock %}
+				</div>
+				<div class="zone-focus menu" >
+					<div id="info-focus">
+						<a class="focus item-0" href="http://www.union-auto-entrepreneurs.com/actualites/kit-de-survie-de-lauto-entrepreneur-aides-covid-19/">
+							<h3 class="titre">
+								<i class="fa fa-bullhorn" aria-hidden="true"></i>
+								<span>Info Covid 19</span>
+							</h3>
+							<div class="texte">
+								<p>Demande d'aides, fonds de solidarité, droits sociaux, prêt PGE de 3 mois de CA, posez nous vos questions >>></p>
+							</div>
+						</a>
+						<a class="info item-1" href="http://www.union-auto-entrepreneurs.com/lactualite-auto-entrepreneur-uae/">
+							<h3 class="titre">
+								<i class="fa fa-microphone" aria-hidden="true"></i>
+								<span>Tribune
+								</span>
+							</h3>
+							<div class="texte">
+								<p>Le Monde : tribune de François Hurel. Bâtissons une protection sociale pour tous les auto-entrepreneurs...>>></p>
+							</div>
+						</a>
+						<a class="info item-2" href="region-corse-auto-entrepreneur/index.htm">
+							<h3 class="titre">
+								<i class="fa fa-exclamation" aria-hidden="true"></i>
+								<span>L’UAE en région Corse</span>
+							</h3>
+							<div class="texte">
+								<p>Une représentation active de l’UAE en Corse,une démarche locale dans un territoire dynamique  >>></p>
+							</div>
+						</a>
+						<a class="info item-3" href="index-5.htm">
+							<h3 class="titre">
+								<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+								<span>Trouver son code naf...</span>
+							</h3>
+							<div class="texte">
+								<p>Avec l'UAE et Totch, c'est facile de trouver le code NAF de son activité avec le nouvel outil créé : moncodenaf.fr !! >>>>
+								</p>
+							</div>
+						</a>
+						<a class="info item-4" href="index-6.htm">
+							<h3 class="titre">
+								<i class="fa fa-child" aria-hidden="true"></i>
+								<span>Le Prix Audace !</span>
+							</h3>
+							<div class="texte">
+								<p>Et... si vous déposiez votre candidature au Prix Audace ? Le seul concours dédié aux auto-entrepreneurs...</p>
+							</div>
+						</a>
 					</div>
-				</noscript>
-				<!-- End Quantcast tag -->
+				</div>
 			</div>
-			<script src="{{asset('./web/wp-content/cache/min/1/c029511e7969258f96e230ce886ec645.js')}}" data-minify="1"></script>
+
+
+			<!-- Quantcast Tag -->
+
+
+			<noscript>
+				<div style="display:none;">
+					<img src="./web/pixel/p-FPNzF4yzF5Ljs.gif" border="0" height="1" width="1" alt="Quantcast">
+				</div>
+			</noscript>
+			<!-- End Quantcast tag -->
+
 		</body>
-		<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1597822486 -->
-	</body>
-</body></body>
+	</div>
+	<script src="{{asset('./web/wp-content/cache/min/1/c029511e7969258f96e230ce886ec645.js')}}" data-minify="1"></script>
+</body><!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1597822486 --></body></body></body>

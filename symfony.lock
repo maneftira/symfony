@@ -171,6 +171,9 @@
     "spraed/pdf-generator-bundle": {
         "version": "v1.7.2"
     },
+    "stripe/stripe-php": {
+        "version": "v7.49.0"
+    },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.3"
     },
