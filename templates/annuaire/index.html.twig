@@ -1,0 +1,25 @@
+{% extends 'home/home.html.twig' %}
+
+{% block title %}Annuaire
+{% endblock %}
+{% block body %}
+	{{form_start(form)}}
+	<div class="row" style="position:relative;right:-150px">
+		<div class="col">{{form_row(form.ville)}}
+		</div>
+		<div class="col">{{form_row(form.secteur,{'label':'Secteur/Etablissement/Activité'})}}</div>
+	</div>
+	<div style="position:relative;right:-330px">{{form_row(form.submit)  }}</div>
+	{{form_end(form)}}
+    <img src="./web/carte.jpg" style="height:500px;position:relative;right:-180px;">
+	<div class="container mt-3 border" style="position:relative;right:-150px;border-radius:25px">
+		<center>
+			{% for i in list%}
+				<strong>{{i.prenom}},{{i.nom}}</strong>
+				<p class="mt-5"><i class="fa fa-map-marker position-left"></i>{{i.adresseAffaire}}</p>
+				<p>Activités :</p>
+				<p>{{i.activites}}</p>
+			{% endfor %}
+		</center>
+	</div>
+{% endblock %}
