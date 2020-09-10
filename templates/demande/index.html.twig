@@ -12,7 +12,7 @@
 					<p>
 					{% endif %}
 					{% for i in demandes%}
-						<div class="border  mt-5 " style="width: 210mm; height: 297mm; border-radius: 15px;">
+						<div class="border  mt-5 " style="width: 210mm; height: 240mm; border-radius: 15px;">
 							<div class="row">
 								<div class="col">
 									<label style="float: left;">
@@ -180,7 +180,7 @@
 									<p>{{i.fait}}</p>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" style="position:relative;right:-300px">
 							<button class="btn btn-info">
 								<a style="color:white" href="{{path('add',{'id': i.id })}}">Confirmer</a>
 							</button>
